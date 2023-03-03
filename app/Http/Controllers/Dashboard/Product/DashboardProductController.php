@@ -15,6 +15,9 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.product.index', [
             'title' => 'Product',
+            'datas' => product::latest()
+                ->paginate(10)
+                ->withQueryString(),
         ]);
     }
 

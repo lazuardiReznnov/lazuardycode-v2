@@ -4,13 +4,13 @@
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-        <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+        <title>{{ config("app.name", "Laravel") }}</title>
         <meta content="" name="description" />
         <meta content="" name="keywords" />
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon" />
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+        <link href="/assets/img/favicon.png" rel="icon" />
+        <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -23,26 +23,19 @@
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
         <link
-            href="assets/vendor/boxicons/css/boxicons.min.css"
+            href="/assets/vendor/boxicons/css/boxicons.min.css"
             rel="stylesheet"
         />
-        <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-        <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+        <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+        <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+        <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
         <link
-            href="assets/vendor/simple-datatables/style.css"
+            href="/assets/vendor/simple-datatables/style.css"
             rel="stylesheet"
         />
 
         <!-- Template Main CSS File -->
-        <link href="assets/css/style.css" rel="stylesheet" />
-
-        <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        <link href="/assets/css/style.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -73,15 +66,15 @@
         ></a>
 
         <!-- Vendor JS Files -->
-        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 
-        <script src="assets/vendor/echarts/echarts.min.js"></script>
-        <script src="assets/vendor/quill/quill.min.js"></script>
-        <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-        <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
+        <script src="/assets/vendor/echarts/echarts.min.js"></script>
+        <script src="/assets/vendor/quill/quill.min.js"></script>
+        <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="/assets/vendor/php-email-form/validate.js"></script>
 
         <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
+        <script src="/assets/js/main.js"></script>
     </body>
 </html>

@@ -1,24 +1,105 @@
 <x-administrator>
-    <x-pagetitle title="Product">
+    <x-pagetitle title="{{ $title }}">
         <x-breadcrumb>
             <x-breadcrumblink link="/dashboard">Dashboard</x-breadcrumblink>
-            <x-breadcrumbactive>Dashboard</x-breadcrumbactive>
+            <x-breadcrumbactive>{{ $title }}</x-breadcrumbactive>
         </x-breadcrumb>
     </x-pagetitle>
 
     <!-- End Page Title -->
 
     <x-section numb="12">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Welcome</h5>
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session("status") }}
+        <!-- Pesan -->
+        <div class="row">
+            <div class="col-md-10">
+                @if(session()->has('success'))
+                <div class="card">
+                    <!-- pesan -->
+
+                    <div
+                        class="alert alert-success alert-dismissible fade show"
+                        role="alert"
+                    >
+                        {{ session("success") }}
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="close"
+                        ></button>
+                    </div>
+
+                    <!-- endpesan -->
                 </div>
                 @endif
+            </div>
+        </div>
+        <!-- endPesan -->
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/product/category"
+                    >Category</a
+                >
+            </li>
+        </ul>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Product List</h5>
 
-                {{ __("You are logged in!") }}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pic</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($datas->count()) @foreach($datas as $data)
+                        <tr>
+                            <th scope="row">
+                                {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
+                            </th>
+                            <td>
+                                @if($data->pic)
+                                <img
+                                    width="50"
+                                    src="{{ asset('storage/'. $data->pic) }}"
+                                    class="rounded-circle mx-auto d-block shadow my-3"
+                                    alt="Unit Image"
+                                />
+                                @else
+                                <img
+                                    class="rounded-circle mx-auto d-block shadow my-3"
+                                    src="http://source.unsplash.com/200x200?truck"
+                                    alt=""
+                                    width="50"
+                                />
+                                @endif
+                            </td>
+                            <td>{{ $data->brand }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->categoryproduct->name}}</td>
+                            <td>2016-05-25</td>
+                        </tr>
+                        @endforeach @else
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                Data Not Found
+                            </td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ $datas->onEachside(2)->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </x-section>
