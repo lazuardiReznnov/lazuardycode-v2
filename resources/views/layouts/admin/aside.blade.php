@@ -62,6 +62,29 @@
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#product-nav"
+                data-bs-toggle="collapse"
+                href="#"
+            >
+                <i class="bi bi-gear"></i><span>Product Management</span
+                ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="product-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav"
+            >
+                <li>
+                    <a href="/dashboard/product">
+                        <i class="bi bi-circle"></i><span>Product List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- End Components Nav -->
     </ul>
 </aside>

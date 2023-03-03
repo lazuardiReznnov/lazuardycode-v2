@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\Product\DashboardProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/dashboard', [
     App\Http\Controllers\HomeController::class,
     'index',
 ])->name('dashboard');
+
+Route::resource('dashboard/product', DashboardProductController::class);

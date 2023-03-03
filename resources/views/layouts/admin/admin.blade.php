@@ -20,14 +20,8 @@
         />
 
         <!-- Vendor CSS Files -->
-        <link
-            href="assets/vendor/bootstrap/css/bootstrap.min.css"
-            rel="stylesheet"
-        />
-        <link
-            href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-            rel="stylesheet"
-        />
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
         <link
             href="assets/vendor/boxicons/css/boxicons.min.css"
             rel="stylesheet"
@@ -80,8 +74,7 @@
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/chart.js/chart.umd.js"></script>
+
         <script src="assets/vendor/echarts/echarts.min.js"></script>
         <script src="assets/vendor/quill/quill.min.js"></script>
         <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>

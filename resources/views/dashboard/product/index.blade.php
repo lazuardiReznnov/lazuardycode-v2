@@ -1,6 +1,7 @@
 <x-administrator>
-    <x-pagetitle title="Dashboard">
+    <x-pagetitle title="Product">
         <x-breadcrumb>
+            <x-breadcrumblink link="/dashboard">Dashboard</x-breadcrumblink>
             <x-breadcrumbactive>Dashboard</x-breadcrumbactive>
         </x-breadcrumb>
     </x-pagetitle>
