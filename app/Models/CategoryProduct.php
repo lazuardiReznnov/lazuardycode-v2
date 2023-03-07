@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CategoryProduct extends Model
 {
@@ -26,8 +27,8 @@ class CategoryProduct extends Model
         return 'slug';
     }
 
-    public function product()
+    public function Product(): HasMany
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(Product::class);
     }
 }

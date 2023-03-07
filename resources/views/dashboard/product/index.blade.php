@@ -84,7 +84,12 @@
                             <td>{{ $data->brand }}</td>
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->categoryproduct->name}}</td>
-                            <td>2016-05-25</td>
+                            <td>
+                                <a href="/dashboard/product/{{ $data->slug }}">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                                | Hapus | Edit
+                            </td>
                         </tr>
                         @endforeach @else
                         <tr>

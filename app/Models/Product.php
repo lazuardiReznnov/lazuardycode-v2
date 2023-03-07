@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CategoryProduct;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['categoryproduct'];
+    protected $with = ['CategoryProduct'];
 
     public function sluggable(): array
     {
@@ -27,7 +29,7 @@ class Product extends Model
         return 'slug';
     }
 
-    public function categoryproduct()
+    public function CategoryProduct(): BelongsTo
     {
         return $this->belongsTo(CategoryProduct::class);
     }
