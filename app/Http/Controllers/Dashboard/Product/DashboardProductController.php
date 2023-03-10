@@ -42,7 +42,10 @@ class DashboardProductController extends Controller
      */
     public function show(product $product)
     {
-        //
+        return view('dashboard.product.show', [
+            'title' => $product->name,
+            'data' => $product->load('CategoryProduct'),
+        ]);
     }
 
     /**
