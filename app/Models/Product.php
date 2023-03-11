@@ -6,6 +6,7 @@ use App\Models\CategoryProduct;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -32,5 +33,10 @@ class Product extends Model
     public function CategoryProduct(): BelongsTo
     {
         return $this->belongsTo(CategoryProduct::class);
+    }
+
+    public function image(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

@@ -41,7 +41,9 @@
         <!-- endPesan -->
         <ul class="nav justify-content-start">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard/product/category"
+                <a
+                    class="nav-link"
+                    href="/dashboard/product/image/{{ $data->slug }}"
                     >Add Image</a
                 >
             </li>
@@ -79,26 +81,26 @@
                                         <h5>Cicilan</h5>
                                         <p class="fw-bold">
                                             Down Payment : <br />
-                                            {{ $data->dp }}
+                                            @currency($data->dp)
                                         </p>
                                         <hr />
                                         <!-- List group Numbered -->
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <b>3 Bulan :</b>
-                                                <br />{{ $data->three }}
+                                                <br />@currency($data->three)
                                             </li>
                                             <li class="list-group-item">
                                                 <b>6 Bulan :</b> <br />
-                                                {{ $data->six }}
+                                                @currency($data->six)
                                             </li>
                                             <li class="list-group-item">
                                                 <b>9 Bulan :</b>
-                                                <br />{{ $data->nine }}
+                                                <br />@currency($data->nine)
                                             </li>
                                             <li class="list-group-item">
                                                 <b>12 Bulan :</b>
-                                                <br />{{ $data->twelve }}
+                                                <br />@currency($data->twelve)
                                             </li>
                                         </ul>
                                         <!-- End List group Numbered -->

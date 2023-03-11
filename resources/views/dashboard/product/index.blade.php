@@ -42,6 +42,16 @@
                     >Category</a
                 >
             </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    href="/dashboard/product/create"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Add Product"
+                    ><i class="bi bi-file-plus"></i
+                ></a>
+            </li>
         </ul>
         <div class="card">
             <div class="card-body">
@@ -85,7 +95,13 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->categoryproduct->name}}</td>
                             <td>
-                                <a href="/dashboard/product/{{ $data->slug }}">
+                                <a
+                                    href="/dashboard/product/{{ $data->slug }}"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Detail Product"
+                                    class="badge bg-success"
+                                >
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                                 | Hapus | Edit

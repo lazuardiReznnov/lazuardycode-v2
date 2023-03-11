@@ -19,6 +19,7 @@
             rel="stylesheet"
         />
 
+        @stack('css') @stack('script')
         <!-- Vendor CSS Files -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -76,5 +77,6 @@
 
         <!-- Template Main JS File -->
         <script src="/assets/js/main.js"></script>
+        @stack('script2')
     </body>
 </html>
