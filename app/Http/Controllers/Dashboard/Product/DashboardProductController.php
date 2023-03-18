@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use App\Http\Controllers\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\support\Facades\Storage;
 
 class DashboardProductController extends Controller
 {
@@ -18,6 +19,7 @@ class DashboardProductController extends Controller
         return view('dashboard.product.index', [
             'title' => 'Product',
             'datas' => product::latest()
+                ->with('image')
                 ->paginate(10)
                 ->withQueryString(),
         ]);
@@ -49,7 +51,7 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.product.show', [
             'title' => $product->name,
-            'data' => $product->load('CategoryProduct'),
+            'data' => $product->load('CategoryProduct', 'image'),
         ]);
     }
 
@@ -81,5 +83,49 @@ class DashboardProductController extends Controller
     {
         $slug = SlugService::createSlug(product::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createimage(product $product)
+    {
+        return view('dashboard.product.create-image', [
+            'title' => 'File Upload',
+            'data' => $product,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('product-pic');
+
+        $product = product::find($request->product_id);
+
+        $product->image()->create($validatedData);
+
+        return redirect('/dashboard/product/' . $request->product_slug)->with(
+            'success',
+            'New Data Has Been Aded.!'
+        );
+    }
+
+    public function destroyimage(product $product, Request $request)
+    {
+        $data = $product
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/product/' . $product->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }

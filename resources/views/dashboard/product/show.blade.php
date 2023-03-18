@@ -42,17 +42,67 @@
         <ul class="nav justify-content-start">
             <li class="nav-item">
                 <a
-                    class="nav-link"
                     href="/dashboard/product/image/{{ $data->slug }}"
-                    >Add Image</a
-                >
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Add Image"
+                    class="btn btn-primary my-3"
+                    ><i class="bi bi-plus-circle"></i
+                ></a>
             </li>
         </ul>
         <div class="card">
             <div class="card-body">
                 <div class="row justify-content-between">
-                    <div class="col-md-4">
-                        <p>Image</p>
+                    <div class="col-md">
+                        @if($data->image->count())
+                        <div class="row">
+                            @foreach($data->image as $pic)
+                            <div class="col-sm-6">
+                                <div class="card mb-3 shadow d-flex">
+                                    <img
+                                        width="200"
+                                        src="{{ asset('storage/'. $pic->pic) }}"
+                                        class="my-3 d-block mx-auto"
+                                        alt="{{ $pic->name }}"
+                                    />
+                                    <p class="text-center fw-bold">
+                                        {{ $pic->name }}
+                                    </p>
+                                    <form
+                                        action="/dashboard/product/image/{{ $data->slug }}"
+                                        method="post"
+                                        class="d-inline"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="id"
+                                            value="{{ $pic->id }}"
+                                        />
+                                        @method('delete') @csrf
+                                        <button
+                                            class="badge bg-danger"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Delete Image Unit"
+                                            onclick="return confirm('are You sure ??')"
+                                        >
+                                            <i class="bi bi-file-x-fill"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        @else
+                        <img
+                            class="rounded-circle mx-auto d-block shadow my-3"
+                            src="http://source.unsplash.com/200x200?smartphones"
+                            alt=""
+                            width="250"
+                        />
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <!-- List group with active and disabled items -->

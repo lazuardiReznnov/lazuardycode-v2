@@ -29,6 +29,6 @@ Route::controller(DashboardProductController::class)->group(function () {
     Route::get('/dashboard/product/image/{product}', 'createimage');
     Route::post('/dashboard/product/image/', 'storeimage');
     Route::delete('/dashboard/product/image/{product}', 'destroyimage');
-    Route::get('dashboard/product/checkSlug', 'checkSlug');
+    Route::get('/dashboard/product/checkSlug', 'checkSlug');
 });
 Route::resource('dashboard/product', DashboardProductController::class);
