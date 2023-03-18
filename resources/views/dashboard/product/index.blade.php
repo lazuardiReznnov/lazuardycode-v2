@@ -38,9 +38,14 @@
         <!-- endPesan -->
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard/product/category"
-                    >Category</a
-                >
+                <a
+                    class="nav-link"
+                    href="/dashboard/product/category"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Category Product"
+                    ><i class="bi bi-bookmark-plus"></i
+                ></a>
             </li>
             <li class="nav-item">
                 <a
@@ -88,7 +93,24 @@
                                 >
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                | Hapus | Edit
+                                |
+                                <form
+                                    action="/dashboard/product/{{ $data->slug }}"
+                                    method="post"
+                                    class="d-inline"
+                                >
+                                    @method('delete') @csrf
+                                    <button
+                                        class="badge bg-danger"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Delete product"
+                                        onclick="return confirm('are You sure ??')"
+                                    >
+                                        <i class="bi bi-file-x-fill"></i>
+                                    </button>
+                                </form>
+                                | Edit
                             </td>
                         </tr>
                         @endforeach @else

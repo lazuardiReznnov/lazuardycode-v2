@@ -119,45 +119,6 @@
                                 <b>Description</b
                                 ><br />{{ $data->descriptions }}
                             </li>
-                            <li class="list-group-item">
-                                <h5 class="card-title">Harga</h5>
-
-                                <!-- Default List group -->
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <b>Cash</b><br />{{ $data->cash }}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Cicilan</h5>
-                                        <p class="fw-bold">
-                                            Down Payment : <br />
-                                            @currency($data->dp)
-                                        </p>
-                                        <hr />
-                                        <!-- List group Numbered -->
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <b>3 Bulan :</b>
-                                                <br />@currency($data->three)
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>6 Bulan :</b> <br />
-                                                @currency($data->six)
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>9 Bulan :</b>
-                                                <br />@currency($data->nine)
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>12 Bulan :</b>
-                                                <br />@currency($data->twelve)
-                                            </li>
-                                        </ul>
-                                        <!-- End List group Numbered -->
-                                    </li>
-                                    <li class="list-group-item"></li>
-                                </ul>
-                            </li>
                         </ul>
                         <!-- End Clean list group -->
                     </div>

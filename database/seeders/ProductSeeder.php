@@ -20,12 +20,6 @@ class ProductSeeder extends Seeder
             'brand' => 'Samsung',
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
-            'cash' => 2400000,
-            'dp' => 400000,
-            'three' => 875000,
-            'six' => 550000,
-            'nine' => 410000,
-            'twelve' => 330000,
         ]);
 
         Product::create([
@@ -35,12 +29,6 @@ class ProductSeeder extends Seeder
             'brand' => 'Samsung',
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
-            'cash' => 1875000,
-            'dp' => 300000,
-            'three' => 725000,
-            'six' => 410000,
-            'nine' => 0,
-            'twelve' => 0,
         ]);
         Product::create([
             'category_product_id' => 1,
@@ -49,12 +37,6 @@ class ProductSeeder extends Seeder
             'brand' => 'Samsung',
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
-            'cash' => 1875000,
-            'dp' => 300000,
-            'three' => 725000,
-            'six' => 410000,
-            'nine' => 0,
-            'twelve' => 0,
         ]);
     }
 }

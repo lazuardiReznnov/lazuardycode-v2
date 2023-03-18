@@ -41,7 +41,20 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'category_product_id' => 'required',
+            'name' => 'required|unique:products',
+            'slug' => 'required|unique:products',
+            'brand' => 'required',
+            'descriptions' => 'required',
+        ]);
+
+        product::create($validatedData);
+
+        return redirect('/dashboard/product')->with(
+            'success',
+            'Product Has Been Updated.!'
+        );
     }
 
     /**
@@ -76,7 +89,18 @@ class DashboardProductController extends Controller
      */
     public function destroy(product $product)
     {
-        //
+        $product->destroy($product->id);
+        if ($product->image) {
+            foreach ($product->image as $image) {
+                storage::delete($image->pic);
+                $image->delete();
+            }
+        }
+
+        return redirect('/dashboard/product')->with(
+            'success',
+            'New Post Has Been Deleted.'
+        );
     }
 
     public function checkSlug(Request $request)

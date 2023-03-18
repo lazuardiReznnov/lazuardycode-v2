@@ -21,13 +21,7 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->string('brand');
             $table->text('descriptions');
-            $table->string('pic')->nullable();
-            $table->integer('cash');
-            $table->integer('dp');
-            $table->integer('three');
-            $table->integer('six');
-            $table->integer('nine');
-            $table->integer('twelve');
+
             $table->timestamps();
         });
     }
