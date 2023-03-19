@@ -110,7 +110,15 @@
                                         <i class="bi bi-file-x-fill"></i>
                                     </button>
                                 </form>
-                                | Edit
+                                |
+                                <a
+                                    href="/dashboard/product/{{ $data->slug }}/edit"
+                                    class="badge bg-warning"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Edit product"
+                                    ><i class="bi bi-pencil-square"></i
+                                ></a>
                             </td>
                         </tr>
                         @endforeach @else

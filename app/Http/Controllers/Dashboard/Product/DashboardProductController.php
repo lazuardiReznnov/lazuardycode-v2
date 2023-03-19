@@ -73,7 +73,11 @@ class DashboardProductController extends Controller
      */
     public function edit(product $product)
     {
-        //
+        return view('dashboard.product.edit', [
+            'title' => 'Edit Product',
+            'data' => $product,
+            'categories' => CategoryProduct::all(),
+        ]);
     }
 
     /**
@@ -81,7 +85,26 @@ class DashboardProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        //
+        $rules = [
+            'category_product_id' => 'required',
+            'brand' => 'required',
+            'descriptions' => 'required',
+        ];
+
+        if ($request->name != $product->name) {
+            $rules['name'] = 'required|unique:products';
+        }
+        if ($request->slug != $product->slug) {
+            $rules['slug'] = 'required|unique:products';
+        }
+
+        $validatedData = $request->validate($rules);
+        product::where('id', $product->id)->update($validatedData);
+
+        return redirect('/dashboard/product')->with(
+            'success',
+            'Product Has Been Upadated.'
+        );
     }
 
     /**
