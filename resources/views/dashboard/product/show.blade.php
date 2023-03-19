@@ -39,18 +39,25 @@
             </div>
         </div>
         <!-- endPesan -->
-        <ul class="nav justify-content-start">
-            <li class="nav-item">
-                <a
-                    href="/dashboard/product/image/{{ $data->slug }}"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Add Image"
-                    class="btn btn-primary my-3"
-                    ><i class="bi bi-plus-circle"></i
-                ></a>
-            </li>
-        </ul>
+        <div class="btn-group">
+            <a
+                href="/dashboard/product/image/{{ $data->slug }}"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Add Image"
+                class="btn btn-primary my-3"
+                ><i class="bi bi-upload"></i>
+            </a>
+            <a
+                href="/dashboard/product/pricing/{{ $data->slug }}"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Add Pricing"
+                class="btn btn-primary my-3"
+                ><i class="bi bi-tag-fill"></i>
+            </a>
+        </div>
+
         <div class="card">
             <div class="card-body">
                 <div class="row justify-content-between">
@@ -124,6 +131,34 @@
                     </div>
                     <div class="col-md-4">
                         <!-- End Default List group -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase">Pricing</h5>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Cash</div>
+                            <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                        </div>
+                        <h5 class="card-title">Installment</h5>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label">
+                                Downpayment
+                            </div>
+                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-3 col-md-4 label">3 Month</div>
+                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-3 col-md-4 label">6 Month</div>
+                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-3 col-md-4 label">9 Month</div>
+                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-3 col-md-4 label">12 Month</div>
+                            <div class="col-lg-9 col-md-8">0000</div>
+                        </div>
                     </div>
                 </div>
             </div>
