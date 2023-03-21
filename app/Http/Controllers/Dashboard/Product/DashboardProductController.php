@@ -49,7 +49,8 @@ class DashboardProductController extends Controller
             'descriptions' => 'required',
         ]);
 
-        product::create($validatedData);
+        $product = product::create($validatedData);
+        $product->pricing()->create(['product_id' => $product->id]);
 
         return redirect('/dashboard/product')->with(
             'success',

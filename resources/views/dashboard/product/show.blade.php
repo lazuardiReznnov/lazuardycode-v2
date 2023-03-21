@@ -135,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="card col-md-6">
             <div class="card-body">
                 <h5 class="card-title text-uppercase">Pricing</h5>
                 <div class="row justify-content-center">

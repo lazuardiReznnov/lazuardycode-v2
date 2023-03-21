@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Product\DashboardPricingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Product\DashboardProductController;
 
@@ -31,4 +32,10 @@ Route::controller(DashboardProductController::class)->group(function () {
     Route::delete('/dashboard/product/image/{product}', 'destroyimage');
     Route::get('/dashboard/product/checkSlug', 'checkSlug');
 });
+
+Route::controller(DashboardPricingController::class)->group(function () {
+    Route::get('/dashboard/product/pricing/{product}', 'create');
+    Route::put('/dashboard/product/pricing/{product}', 'store');
+});
+
 Route::resource('dashboard/product', DashboardProductController::class);

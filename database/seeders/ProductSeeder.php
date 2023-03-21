@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::create([
+        $product = Product::create([
             'category_product_id' => 1,
             'name' => 'Samsung Galaxy A13 4/128',
             'slug' => 'samsung-galaxy-a13-4128',
@@ -21,8 +21,9 @@ class ProductSeeder extends Seeder
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
+        $product->pricing()->create(['product_id' => $product->id]);
 
-        Product::create([
+        $product2 = Product::create([
             'category_product_id' => 1,
             'name' => 'Samsung Galaxy A03 4/64',
             'slug' => 'samsung-galaxy-a03-464',
@@ -30,7 +31,9 @@ class ProductSeeder extends Seeder
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
-        Product::create([
+
+        $product2->pricing()->create(['product_id' => $product2->id]);
+        $product3 = Product::create([
             'category_product_id' => 1,
             'name' => 'Oppo A54',
             'slug' => 'samsung-galaxy-a03',
@@ -38,5 +41,6 @@ class ProductSeeder extends Seeder
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
+        $product3->pricing()->create(['product_id' => $product3->id]);
     }
 }
