@@ -56,6 +56,31 @@
                 class="btn btn-primary my-3"
                 ><i class="bi bi-tag-fill"></i>
             </a>
+
+            <a
+                href="/dashboard/product/{{ $data->slug }}/edit"
+                class="btn btn-warning my-3"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Edit product"
+                ><i class="bi bi-pencil-square"></i
+            ></a>
+            <form
+                action="/dashboard/product/{{ $data->slug }}"
+                method="post"
+                class="d-inline"
+            >
+                @method('delete') @csrf
+                <button
+                    class="btn btn-danger my-3 rounded-0"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Delete product"
+                    onclick="return confirm('are You sure ??')"
+                >
+                    <i class="bi bi-file-x-fill"></i>
+                </button>
+            </form>
         </div>
 
         <div class="card">
@@ -91,7 +116,7 @@
                                             class="badge bg-danger"
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
-                                            title="Delete Image Unit"
+                                            title="Delete Image"
                                             onclick="return confirm('are You sure ??')"
                                         >
                                             <i class="bi bi-file-x-fill"></i>
@@ -142,22 +167,32 @@
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-lg-3 col-md-4 label">Cash</div>
-                            <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->cash)
+                            </div>
                         </div>
                         <h5 class="card-title">Installment</h5>
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label">
-                                Downpayment
+                            <div class="col-lg-3 col-md-4 label">DP</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->dp)
                             </div>
-                            <div class="col-lg-9 col-md-8">0000</div>
                             <div class="col-lg-3 col-md-4 label">3 Month</div>
-                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->three)
+                            </div>
                             <div class="col-lg-3 col-md-4 label">6 Month</div>
-                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->six)
+                            </div>
                             <div class="col-lg-3 col-md-4 label">9 Month</div>
-                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->nine)
+                            </div>
                             <div class="col-lg-3 col-md-4 label">12 Month</div>
-                            <div class="col-lg-9 col-md-8">0000</div>
+                            <div class="col-lg-9 col-md-8">
+                                : @currency($data->pricing->twelve)
+                            </div>
                         </div>
                     </div>
                 </div>

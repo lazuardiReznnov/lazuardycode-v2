@@ -70,7 +70,7 @@
                 data-bs-toggle="collapse"
                 href="#"
             >
-                <i class="bi bi-gear"></i><span>Product Management</span
+                <i class="bi bi-receipt"></i><span>Product Management</span
                 ><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul

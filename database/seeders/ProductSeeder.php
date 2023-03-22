@@ -34,10 +34,10 @@ class ProductSeeder extends Seeder
 
         $product2->pricing()->create(['product_id' => $product2->id]);
         $product3 = Product::create([
-            'category_product_id' => 1,
+            'category_product_id' => 3,
             'name' => 'Oppo A54',
-            'slug' => 'samsung-galaxy-a03',
-            'brand' => 'Samsung',
+            'slug' => 'oppo-a54',
+            'brand' => 'Oppo',
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);

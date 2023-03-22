@@ -14,14 +14,16 @@ class DashboardProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $product = product::query();
+
+        $product->when($request->search, function ($query) use ($request) {
+            return $query->where('name', 'like', '%' . $request->search . '%');
+        });
         return view('dashboard.product.index', [
             'title' => 'Product',
-            'datas' => product::latest()
-                ->with('image')
-                ->paginate(10)
-                ->withQueryString(),
+            'datas' => $product->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -65,7 +67,7 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.product.show', [
             'title' => $product->name,
-            'data' => $product->load('CategoryProduct', 'image'),
+            'data' => $product->load('CategoryProduct', 'image', 'pricing'),
         ]);
     }
 
@@ -174,6 +176,35 @@ class DashboardProductController extends Controller
         return redirect('/dashboard/product/' . $product->slug)->with(
             'success',
             'Data Has Been Deleted.!'
+        );
+    }
+
+    public function pricingcreate(Product $product)
+    {
+        return view('dashboard.product.pricing.create', [
+            'title' => 'Add Or Update Pricing Product',
+            'data' => $product->load('pricing'),
+        ]);
+    }
+
+    public function pricingstore(Product $product, Request $request)
+    {
+        $rules = [
+            'cash' => 'required',
+            'dp' => 'required',
+            'three' => 'required',
+            'six' => 'required',
+            'nine' => 'required',
+            'twelve' => 'required',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        $product->pricing()->update($validatedData);
+
+        return redirect('/dashboard/product/' . $product->slug)->with(
+            'success',
+            'Data Has Been Updated.!'
         );
     }
 }

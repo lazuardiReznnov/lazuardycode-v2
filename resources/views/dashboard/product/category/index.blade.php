@@ -2,12 +2,12 @@
     <x-pagetitle title="{{ $title }}">
         <x-breadcrumb>
             <x-breadcrumblink link="/dashboard">Dashboard</x-breadcrumblink>
+            <x-breadcrumblink link="/dashboard/product"
+                >Product</x-breadcrumblink
+            >
             <x-breadcrumbactive>{{ $title }}</x-breadcrumbactive>
         </x-breadcrumb>
     </x-pagetitle>
-
-    <!-- End Page Title -->
-
     <x-section numb="12">
         <!-- Pesan -->
         <div class="row">
@@ -41,15 +41,7 @@
                 <div class="btn-group">
                     <a
                         class="btn btn-primary"
-                        href="/dashboard/product/CategoryProduct"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Category Product"
-                        ><i class="bi bi-bookmark-plus"></i
-                    ></a>
-                    <a
-                        class="btn btn-primary"
-                        href="/dashboard/product/create"
+                        href="/dashboard/product/CategoryProduct/create"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title="Add Product"
@@ -58,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <form action="/dashboard/product" method="get">
+                <form action="/dashboard/product/CategoryProduct" method="get">
                     <div class="input-group mb-3">
                         <input
                             type="text"
@@ -88,10 +80,9 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-
-                            <th scope="col">Brand</th>
+                            <th scope="col">Pic</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -102,45 +93,61 @@
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
 
-                            <td>{{ $data->brand }}</td>
+                            <td>
+                                @if($data->image)
+                                <img
+                                    width="50"
+                                    src="{{ asset('storage/'. $data->image->pic) }}"
+                                    class="my-3 d-block mx-auto"
+                                    alt="{{ $data->image->name }}"
+                                />
+                                @else
+                                <img
+                                    class="rounded-circle mx-auto d-block shadow my-3"
+                                    src="http://source.unsplash.com/200x200?smartphones"
+                                    alt=""
+                                    width="50"
+                                />
+                                @endif
+                            </td>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->categoryproduct->name}}</td>
+                            <td>{{ $data->descriptions}}</td>
                             <td>
                                 <a
-                                    href="/dashboard/product/{{ $data->slug }}"
+                                    href="/dashboard/product/CategoryProduct/image/{{ $data->slug }}"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    title="Detail Product"
-                                    class="badge bg-success"
-                                >
-                                    <i class="bi bi-eye-fill"></i>
+                                    title="Add Image"
+                                    class="badge bg-primary"
+                                    ><i class="bi bi-upload"></i>
                                 </a>
-                                |
-                                <form
-                                    action="/dashboard/product/{{ $data->slug }}"
-                                    method="post"
-                                    class="d-inline"
-                                >
-                                    @method('delete') @csrf
-                                    <button
-                                        class="badge bg-danger"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete product"
-                                        onclick="return confirm('are You sure ??')"
-                                    >
-                                        <i class="bi bi-file-x-fill"></i>
-                                    </button>
-                                </form>
+
                                 |
                                 <a
-                                    href="/dashboard/product/{{ $data->slug }}/edit"
+                                    href="/dashboard/product/CategoryProduct/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
                                     title="Edit product"
                                     ><i class="bi bi-pencil-square"></i
                                 ></a>
+                                |
+                                <form
+                                    action="/dashboard/product/CategoryProduct/{{ $data->slug }}"
+                                    method="post"
+                                    class="d-inline"
+                                >
+                                    @method('delete') @csrf
+                                    <button
+                                        class="badge bg-danger border-0"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Delete Category"
+                                        onclick="return confirm('are You sure ??')"
+                                    >
+                                        <i class="bi bi-file-x-fill"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach @else
