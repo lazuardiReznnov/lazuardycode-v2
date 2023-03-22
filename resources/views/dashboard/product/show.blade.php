@@ -10,8 +10,7 @@
     </x-pagetitle>
 
     <!-- End Page Title -->
-
-    <x-section numb="12">
+    <section class="section profile">
         <!-- Pesan -->
         <div class="row">
             <div class="col-md-10">
@@ -82,121 +81,178 @@
                 </button>
             </form>
         </div>
-
-        <div class="card">
-            <div class="card-body">
-                <div class="row justify-content-between">
-                    <div class="col-md">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div
+                        class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                    >
                         @if($data->image->count())
                         <div class="row">
                             @foreach($data->image as $pic)
                             <div class="col-sm-6">
-                                <div class="card mb-3 shadow d-flex">
-                                    <img
-                                        width="200"
-                                        src="{{ asset('storage/'. $pic->pic) }}"
-                                        class="my-3 d-block mx-auto"
-                                        alt="{{ $pic->name }}"
+                                <img
+                                    src="{{ asset('storage/'. $pic->pic) }}"
+                                    class="my-3 rounded-circle"
+                                    alt="{{ $pic->name }}"
+                                />
+
+                                <form
+                                    action="/dashboard/product/image/{{ $data->slug }}"
+                                    method="post"
+                                    class="d-inline"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value="{{ $pic->id }}"
                                     />
-                                    <p class="text-center fw-bold">
-                                        {{ $pic->name }}
-                                    </p>
-                                    <form
-                                        action="/dashboard/product/image/{{ $data->slug }}"
-                                        method="post"
-                                        class="d-inline"
+                                    @method('delete') @csrf
+                                    <button
+                                        class="badge bg-danger"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Delete Image"
+                                        onclick="return confirm('are You sure ??')"
                                     >
-                                        <input
-                                            type="hidden"
-                                            name="id"
-                                            value="{{ $pic->id }}"
-                                        />
-                                        @method('delete') @csrf
-                                        <button
-                                            class="badge bg-danger"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Delete Image"
-                                            onclick="return confirm('are You sure ??')"
-                                        >
-                                            <i class="bi bi-file-x-fill"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                        <i class="bi bi-file-x-fill"></i>
+                                    </button>
+                                </form>
                             </div>
                             @endforeach
                         </div>
-
                         @else
-                        <img
-                            class="rounded-circle mx-auto d-block shadow my-3"
-                            src="http://source.unsplash.com/200x200?smartphones"
-                            alt=""
-                            width="250"
-                        />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img
+                                    class="rounded-circle mx-auto d-block shadow my-3"
+                                    src="http://source.unsplash.com/200x200?smartphones"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+
                         @endif
+
+                        <h2 class="text-center">{{ $data->name }}</h2>
                     </div>
-                    <div class="col-md-6">
-                        <!-- List group with active and disabled items -->
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <b>Brand</b><br />
-                                {{ $data->brand}}
+                </div>
+            </div>
+
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link active"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview"
+                                >
+                                    Overview
+                                </button>
                             </li>
-                            <li class="list-group-item">
-                                <b>Category</b><br />
-                                {{ $data->CategoryProduct->name }}
-                            </li>
-                            <li class="list-group-item">
-                                <b>Description</b
-                                ><br />{{ $data->descriptions }}
+
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#pricing"
+                                >
+                                    Pricing
+                                </button>
                             </li>
                         </ul>
-                        <!-- End Clean list group -->
-                    </div>
-                    <div class="col-md-4">
-                        <!-- End Default List group -->
+                        <div class="tab-content pt-2">
+                            <div
+                                class="tab-pane fade show active profile-overview"
+                                id="profile-overview"
+                            >
+                                <h5 class="card-title">Details Product</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        Brand
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        {{ $data->brand }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        Category
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        {{ $data->CategoryProduct->name }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        Description
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        {{ $data->descriptions }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="tab-pane fade profile-overview pt-3"
+                                id="pricing"
+                            >
+                                <h5 class="card-title">
+                                    @currency($data->pricing->cash)
+                                </h5>
+                                <h5 class="card-title">Installment</h5>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        Downpayment
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        @currency($data->pricing->dp)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        3 Month
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        @currency($data->pricing->three)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        6 Month
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        @currency($data->pricing->six)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        9 Month
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        @currency($data->pricing->nine)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">
+                                        12 Month
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">
+                                        @currency($data->pricing->twelve)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Bordered Tabs -->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card col-md-6">
-            <div class="card-body">
-                <h5 class="card-title text-uppercase">Pricing</h5>
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Cash</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->cash)
-                            </div>
-                        </div>
-                        <h5 class="card-title">Installment</h5>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">DP</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->dp)
-                            </div>
-                            <div class="col-lg-3 col-md-4 label">3 Month</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->three)
-                            </div>
-                            <div class="col-lg-3 col-md-4 label">6 Month</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->six)
-                            </div>
-                            <div class="col-lg-3 col-md-4 label">9 Month</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->nine)
-                            </div>
-                            <div class="col-lg-3 col-md-4 label">12 Month</div>
-                            <div class="col-lg-9 col-md-8">
-                                : @currency($data->pricing->twelve)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </x-section>
+    </section>
 </x-administrator>
