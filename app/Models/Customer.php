@@ -28,6 +28,6 @@ class Customer extends Model
 
     public function image(): MorphOne
     {
-        return $this->morphoMorphOne(Image::class, 'imageable');
+        return $this->MorphOne(Image::class, 'imageable');
     }
 }
