@@ -114,16 +114,6 @@
                             <td>{{ $data->descriptions}}</td>
                             <td>
                                 <a
-                                    href="/dashboard/product/CategoryProduct/image/{{ $data->slug }}"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Add Image"
-                                    class="badge bg-primary"
-                                    ><i class="bi bi-upload"></i>
-                                </a>
-
-                                |
-                                <a
                                     href="/dashboard/product/CategoryProduct/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"

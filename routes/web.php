@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
 use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
 use App\Http\Controllers\Dashboard\Product\DashboardPricingController;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,9 @@ Route::controller(DashboardProductController::class)->group(function () {
 });
 
 Route::resource('dashboard/product', DashboardProductController::class);
+
+Route::controller(DashboardCustomerController::class)->group(function () {
+    Route::get('/dashboard/customer/checkSlug', 'checkSlug');
+});
+
+Route::resource('/dashboard/customer', DashboardCustomerController::class);
