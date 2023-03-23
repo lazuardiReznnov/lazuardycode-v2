@@ -108,6 +108,29 @@
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#fintech-nav"
+                data-bs-toggle="collapse"
+                href="#"
+            >
+                <i class="bi bi-bank"></i><span>fintech Management</span
+                ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="fintech-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav"
+            >
+                <li>
+                    <a href="/dashboard/fintech">
+                        <i class="bi bi-circle"></i><span>fintech List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- End Components Nav -->
     </ul>
 </aside>

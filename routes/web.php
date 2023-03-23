@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
+use App\Http\Controllers\Dashboard\Fintech\DashboardFintechController;
 use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
-use App\Http\Controllers\Dashboard\Product\DashboardPricingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Product\DashboardProductController;
 
@@ -54,3 +54,8 @@ Route::controller(DashboardCustomerController::class)->group(function () {
 });
 
 Route::resource('/dashboard/customer', DashboardCustomerController::class);
+
+Route::controller(DashboardFintechController::class)->group(function () {
+    Route::get('/dashboard/fintech/checkSlug', 'checkSlug');
+});
+Route::resource('/dashboard/fintech', DashboardFintechController::class);

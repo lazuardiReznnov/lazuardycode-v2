@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
                 '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
 
-        $this->call([CategoryProductSeeder::class, ProductSeeder::class]);
+        $this->call([
+            FintechSeeder::class,
+            CategoryProductSeeder::class,
+            ProductSeeder::class,
+        ]);
     }
 }
