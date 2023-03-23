@@ -56,6 +56,22 @@ Route::controller(DashboardCustomerController::class)->group(function () {
 Route::resource('/dashboard/customer', DashboardCustomerController::class);
 
 Route::controller(DashboardFintechController::class)->group(function () {
+    Route::get('/dashboard/fintech/acountfintech/checkSlug', 'cardcheckSlug');
     Route::get('/dashboard/fintech/checkSlug', 'checkSlug');
+    Route::get('/dashboard/fintech/acountfintech/{fintech}', 'createcard');
+    Route::post('/dashboard/fintech/acountfintech', 'storecard');
+    Route::get(
+        '/dashboard/fintech/acountfintech/{acountFintech}/edit',
+        'editcard'
+    );
+    Route::put(
+        '/dashboard/fintech/acountfintech/{acountFintech}',
+        'updatecard'
+    );
+
+    Route::delete(
+        '/dashboard/fintech/acountfintech/{acountFintech}',
+        'carddestroy'
+    );
 });
 Route::resource('/dashboard/fintech', DashboardFintechController::class);

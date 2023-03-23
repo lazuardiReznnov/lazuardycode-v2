@@ -10,13 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('acountfinteches', function (Blueprint $table) {
+        Schema::create('acount_finteches', function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignId('fintech_id')
-                ->constrained('finteches')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->constrained('acount_finteches')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->integer('number');
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('acountfinteches');
+        Schema::dropIfExists('acount_finteches');
     }
 };

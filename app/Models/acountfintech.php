@@ -4,21 +4,35 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Node\Stmt\Return_;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class acountfintech extends Model
+class acountFintech extends Model
 {
-    use HasFactory;
-
+    use HasFactory, Sluggable;
     protected $guarded = ['id'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
+    }
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    public function image(): MorphOne
+    {
+        return $this->MorphOne(Image::class, 'imageable');
+    }
+
     public function fintech()
     {
-        return $this->belongsTo(Fintech::class);
+        return $this->belongsTo(fintech::class);
     }
 }

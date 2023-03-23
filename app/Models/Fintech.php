@@ -31,8 +31,8 @@ class Fintech extends Model
         return $this->MorphOne(Image::class, 'imageable');
     }
 
-    public function acountfintech()
+    public function acountFintech()
     {
-        return $this->hasMany(acountfintech::class);
+        return $this->hasMany(acountFintech::class);
     }
 }

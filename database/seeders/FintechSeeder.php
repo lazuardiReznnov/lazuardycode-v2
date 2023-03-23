@@ -19,7 +19,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'flexy cash',
                 'slug' => 'jenius-flexy-cash',
@@ -32,7 +32,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'Batman Card',
                 'slug' => 'batman-card',
@@ -45,7 +45,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'dbs Card',
                 'slug' => 'dbs-card',
@@ -58,7 +58,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'Bni Card',
                 'slug' => 'bni-card',
@@ -71,7 +71,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'Cimb Syariah',
                 'slug' => 'cimb-syariah',
@@ -84,7 +84,7 @@ class FintechSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dignissimos in error exercitationem aliquam quisquam.',
         ])
-            ->acountfintech()
+            ->acountFintech()
             ->create([
                 'name' => 'Tokopedia Card',
                 'slug' => 'tokopedia-card',

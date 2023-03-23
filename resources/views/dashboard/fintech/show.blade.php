@@ -16,9 +16,9 @@
                 href="/dashboard/fintech/acountfintech/{{ $data->slug }}"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
-                title="Add Image"
+                title="Add card"
                 class="btn btn-primary my-3"
-                ><i class="bi bi-upload"></i>
+                ><i class="bi bi-credit-card"></i>
             </a>
             <a
                 href="/dashboard/fintech/{{ $data->slug }}/edit"
@@ -165,7 +165,7 @@
                                             <td>{{ $fin->number }}</td>
                                             <td>
                                                 <a
-                                                    href="/dashboard/fintech/acountfintech/{{ $data->slug }}/edit"
+                                                    href="/dashboard/fintech/acountfintech/{{ $fin->slug }}/edit"
                                                     class="badge bg-warning"
                                                     data-bs-toggle="tooltip"
                                                     data-bs-placement="top"
@@ -176,7 +176,7 @@
                                                 ></a>
                                                 |
                                                 <form
-                                                    action="/dashboard/fintech/acountfintech/{{ $data->slug }}"
+                                                    action="/dashboard/fintech/acountfintech/{{ $fin->slug }}"
                                                     method="post"
                                                     class="d-inline"
                                                 >
