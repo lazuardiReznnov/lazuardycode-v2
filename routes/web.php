@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
 use App\Http\Controllers\Dashboard\Fintech\DashboardFintechController;
+use App\Http\Controllers\Dashboard\Marketing\DashboardMarketingController;
 use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Product\DashboardProductController;
@@ -51,6 +52,7 @@ Route::resource('dashboard/product', DashboardProductController::class);
 
 Route::controller(DashboardCustomerController::class)->group(function () {
     Route::get('/dashboard/customer/checkSlug', 'checkSlug');
+    Route::delete('/dashboard/customer/image/{customer}', 'destroyimage');
 });
 
 Route::resource('/dashboard/customer', DashboardCustomerController::class);
@@ -75,3 +77,10 @@ Route::controller(DashboardFintechController::class)->group(function () {
     );
 });
 Route::resource('/dashboard/fintech', DashboardFintechController::class);
+
+Route::controller(DashboardMarketingController::class)->group(function () {
+    Route::get('/dashboard/marketing/checkSlug', 'checkSlug');
+    Route::delete('/dashboard/marketing/image/{marketing}', 'destroyimage');
+});
+
+Route::resource('/dashboard/marketing', DashboardMarketingController::class);

@@ -131,6 +131,30 @@
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#marketing-nav"
+                data-bs-toggle="collapse"
+                href="#"
+            >
+                <i class="bi bi-person-badge"></i
+                ><span>Marketing Management</span
+                ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="marketing-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav"
+            >
+                <li>
+                    <a href="/dashboard/marketing">
+                        <i class="bi bi-circle"></i><span>marketing List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- End Components Nav -->
     </ul>
 </aside>

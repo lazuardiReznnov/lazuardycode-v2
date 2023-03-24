@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             FintechSeeder::class,
             CategoryProductSeeder::class,
             ProductSeeder::class,
+            MarketingSeeder::class,
         ]);
     }
 }

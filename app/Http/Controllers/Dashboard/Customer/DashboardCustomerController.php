@@ -155,4 +155,20 @@ class DashboardCustomerController extends Controller
         );
         return response()->json(['slug' => $slug]);
     }
+
+    public function destroyimage(Customer $customer, Request $request)
+    {
+        $data = $customer
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/customer/' . $customer->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
+    }
 }
