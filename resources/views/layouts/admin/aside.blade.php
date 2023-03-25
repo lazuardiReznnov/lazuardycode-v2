@@ -155,6 +155,42 @@
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#transaction-nav"
+                data-bs-toggle="collapse"
+                href="#"
+            >
+                <i class="bi bi-person-badge"></i
+                ><span>Transaction Management</span
+                ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="transaction-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav"
+            >
+                <li>
+                    <a href="/dashboard/transaction">
+                        <i class="bi bi-circle"></i
+                        ><span>Transaction List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/transaction/ledger">
+                        <i class="bi bi-circle"></i
+                        ><span>Acounting Ledger</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/transaction/debt">
+                        <i class="bi bi-circle"></i><span>Debt</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- End Components Nav -->
     </ul>
 </aside>

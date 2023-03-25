@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Marketing\DashboardMarketingController;
 use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Product\DashboardProductController;
+use App\Http\Controllers\Dashboard\Transaction\DashboardTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,3 +85,8 @@ Route::controller(DashboardMarketingController::class)->group(function () {
 });
 
 Route::resource('/dashboard/marketing', DashboardMarketingController::class);
+
+Route::resource(
+    '/dashboard/transaction',
+    DashboardTransactionController::class
+);

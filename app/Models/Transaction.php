@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Customer extends Model
+class Transaction extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
@@ -26,13 +26,13 @@ class Customer extends Model
         return 'slug';
     }
 
-    public function image(): MorphOne
+    public function product()
     {
-        return $this->MorphOne(Image::class, 'imageable');
+        return $this->belongsTo(Product::class);
     }
 
-    public function transaction()
+    public function customer()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsTo(Customer::class);
     }
 }

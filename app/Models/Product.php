@@ -44,4 +44,9 @@ class Product extends Model
     {
         return $this->hasOne(Pricing::class);
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
 }
