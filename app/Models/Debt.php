@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Transaction extends Model
+class Debt extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
@@ -25,18 +25,8 @@ class Transaction extends Model
         return 'slug';
     }
 
-    public function product()
+    public function transaction()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
-    public function debt()
-    {
-        return $this->hasOne(Debt::class);
+        return $this->belongsTo(Transaction::class);
     }
 }

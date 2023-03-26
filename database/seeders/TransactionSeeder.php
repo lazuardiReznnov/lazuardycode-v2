@@ -13,7 +13,7 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        Transaction::create([
+        $transaction = Transaction::create([
             'customer_id' => 1,
             'product_id' => 1,
             'name' => 'INV001',
@@ -22,6 +22,15 @@ class TransactionSeeder extends Seeder
             'tenor' => 9,
             'dp' => 1000000,
             'amount' => 350000,
+        ]);
+
+        $transaction->Debt()->create([
+            'transaction_id' => 1,
+            'acount_fintech_id' => 1,
+            'name' => 'INV001Debt',
+            'slug' => 'inv001-debt',
+            'amount' => 414000,
+            'tenor' => 6,
         ]);
     }
 }

@@ -50,7 +50,10 @@ class DashboardTransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('dashboard.transaction.show', [
+            'title' => $transaction->name,
+            'data' => $transaction->load('product', 'customer', 'debt'),
+        ]);
     }
 
     /**
