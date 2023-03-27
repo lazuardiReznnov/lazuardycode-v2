@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard\Transaction;
 
-use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\CategoryProduct;
+use App\Models\Customer;
+use App\Models\Product;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardTransactionController extends Controller
 {
@@ -34,7 +38,11 @@ class DashboardTransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.transaction.create', [
+            'title' => 'Create Transaction',
+            'categories' => CategoryProduct::all(),
+            'customers' => Customer::all(),
+        ]);
     }
 
     /**
@@ -42,7 +50,7 @@ class DashboardTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate(['']);
     }
 
     /**
@@ -78,5 +86,24 @@ class DashboardTransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(
+            Transaction::class,
+            'slug',
+            $request->name
+        );
+        return response()->json(['slug' => $slug]);
+    }
+
+    public function getproduct(Request $request)
+    {
+        $product = Product::where(
+            'category_product_id',
+            $request->category
+        )->get();
+        return response()->json($product);
     }
 }
