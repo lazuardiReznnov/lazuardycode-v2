@@ -89,6 +89,7 @@ Route::resource('/dashboard/marketing', DashboardMarketingController::class);
 Route::controller(DashboardTransactionController::class)->group(function () {
     Route::get('/dashboard/transaction/checkSlug', 'checkSlug');
     Route::get('/dashboard/transaction/getproduct', 'getproduct');
+    Route::get('/dashboard/transaction/getamount', 'getamount');
 });
 Route::resource(
     '/dashboard/transaction',

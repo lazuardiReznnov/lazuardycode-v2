@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryProduct;
 use App\Models\Customer;
+use App\Models\Pricing;
 use App\Models\Product;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -105,5 +106,16 @@ class DashboardTransactionController extends Controller
             $request->category
         )->get();
         return response()->json($product);
+    }
+
+    public function getamount(Request $request)
+    {
+        $data = '';
+        $prices = Pricing::where('product_id', $request->product)->get();
+        foreach ($prices as $price) {
+            $y = $request->tenor;
+            $data = $price->$y;
+        }
+        return response()->json($data);
     }
 }

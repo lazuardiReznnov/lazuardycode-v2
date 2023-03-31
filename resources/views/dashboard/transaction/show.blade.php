@@ -113,28 +113,6 @@
                                     : {{ $data->product->name }}
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Tenor</div>
-                                <div class="col-lg-9 col-md-8">
-                                    : {{ $data->tenor }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">
-                                    Downpayment
-                                </div>
-                                <div class="col-lg-9 col-md-8">
-                                    : @currency($data->dp)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">
-                                    Amount
-                                </div>
-                                <div class="col-lg-9 col-md-8">
-                                    : @currency($data->amount)
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,6 +127,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">Downpayment</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Tenor</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Total Paid</th>
                                     <th scope="col">difference</th>
@@ -156,6 +137,9 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>@currency($data->dp)</td>
+                                    <td>@currency($data->amount)</td>
+                                    <td>{{ $data->tenor }}</td>
                                     <td>
                                         @php $ttm = $data->amount *$data->tenor
                                         @endphp @currency($ttm)

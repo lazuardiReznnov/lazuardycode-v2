@@ -322,6 +322,20 @@
                     product.innerHTML = card;
                 });
         });
+
+        const amount = document.querySelector("#amount");
+        const tenor = document.querySelector("#tenor");
+
+        tenor.addEventListener("change", function () {
+            fetch(
+                "/dashboard/transaction/getamount?product=" +
+                    product.value +
+                    "&tenor=" +
+                    tenor.value
+            )
+                .then((response) => response.json())
+                .then((data) => (amount.value = data));
+        });
     </script>
     @push('script')
     <script src="/assets/js/lazuardicode.js"></script>
