@@ -95,7 +95,12 @@ class DashboardTransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return view('dashboard.transaction.edit', [
+            'title' => 'Edit Transaction',
+            'data' => $transaction->load('product', 'customer'),
+            'categories' => CategoryProduct::all(),
+            'customers' => Customer::all(),
+        ]);
     }
 
     /**
@@ -103,7 +108,39 @@ class DashboardTransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $rules = [
+            'customer_id' => 'required',
+            'product_id' => 'required',
+            'tgl' => 'required',
+            'tenor' => 'required',
+            'dp' => 'required',
+            'amount' => 'required',
+        ];
+        if ($request->name != $transaction->name) {
+            $rules['name'] = 'required|unique:transactions|max:25';
+        }
+        if ($request->slug != $transaction->slug) {
+            $rules['slug'] = 'required|unique:transactions';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->tenor == 'three') {
+            $validatedData['tenor'] = 3;
+        } elseif ($request->tenor == 'six') {
+            $validatedData['tenor'] = 6;
+        } elseif ($request->tenor == 'nine') {
+            $validatedData['tenor'] = 9;
+        } elseif ($request->tenor == 'twelve') {
+            $validatedData['tenor'] = 12;
+        }
+
+        Transaction::where('id', $transaction->id)->update($validatedData);
+
+        return redirect('/dashboard/transaction')->with(
+            'success',
+            'Data Has Been Updated.!'
+        );
     }
 
     /**
@@ -111,7 +148,12 @@ class DashboardTransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->destroy($transaction->id);
+
+        return redirect('/dashboard/transaction')->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 
     public function checkSlug(Request $request)
