@@ -103,6 +103,43 @@
                         <label
                             for="category"
                             class="col-md-4 col-form-label text-md-end"
+                            >{{ __("customer") }}</label
+                        >
+
+                        <div class="col-md-6">
+                            <select
+                                class="form-select @error('category_product_id') is-invalid @enderror"
+                                id="customer"
+                                aria-label="customer"
+                                name="customer_id"
+                            >
+                                <option selected value="">
+                                    Select customer
+                                </option>
+                                @foreach($customers as $customer)
+                                @if(old('customer_id')==$customer->id)
+                                <option value="{{ $customer->id }}" selected>
+                                    {{ $customer->name }}
+                                </option>
+                                @else
+                                <option value="{{ $customer->id }}">
+                                    {{ $customer->name }}
+                                </option>
+                                @endif @endforeach
+                            </select>
+
+                            @error('customer_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label
+                            for="category"
+                            class="col-md-4 col-form-label text-md-end"
                             >{{ __("Category") }}</label
                         >
 
@@ -129,43 +166,6 @@
                             </select>
 
                             @error('category_product_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="category"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Category") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <select
-                                class="form-select @error('category_product_id') is-invalid @enderror"
-                                id="customer"
-                                aria-label="customer"
-                                name="customer_id"
-                            >
-                                <option selected value="">
-                                    Select customer
-                                </option>
-                                @foreach($customers as $customer)
-                                @if(old('customer_id')==$customer->id)
-                                <option value="{{ $customer->id }}" selected>
-                                    {{ $customer->name }}
-                                </option>
-                                @else
-                                <option value="{{ $customer->id }}">
-                                    {{ $customer->name }}
-                                </option>
-                                @endif @endforeach
-                            </select>
-
-                            @error('customer_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -210,7 +210,7 @@
                                 class="form-control"
                             >
                                 <option value="" selected>
-                                    --Pilih Tenor--
+                                    --Select Tenor--
                                 </option>
                                 <option value="three">3</option>
                                 <option value="six">6</option>
@@ -334,7 +334,11 @@
                     tenor.value
             )
                 .then((response) => response.json())
-                .then((data) => (amount.value = data));
+                .then(
+                    (data) => (
+                        (amount.value = data.amount), (dp.value = data.dp)
+                    )
+                );
         });
     </script>
     @push('script')

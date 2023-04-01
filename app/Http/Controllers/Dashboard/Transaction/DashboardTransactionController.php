@@ -51,7 +51,32 @@ class DashboardTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate(['']);
+        $validatedData = $request->validate([
+            'customer_id' => 'required',
+            'product_id' => 'required',
+            'name' => 'required|unique:transactions',
+            'slug' => 'required|unique:transactions',
+            'tgl' => 'required',
+            'tenor' => 'required',
+            'dp' => 'required',
+            'amount' => 'required',
+        ]);
+
+        if ($request->tenor == 'three') {
+            $validatedData['tenor'] = 3;
+        } elseif ($request->tenor == 'six') {
+            $validatedData['tenor'] = 6;
+        } elseif ($request->tenor == 'nine') {
+            $validatedData['tenor'] = 9;
+        } elseif ($request->tenor == 'twelve') {
+            $validatedData['tenor'] = 12;
+        }
+        Transaction::create($validatedData);
+
+        return redirect('/dashboard/transaction')->with(
+            'success',
+            'Data Has Been Added.!'
+        );
     }
 
     /**
@@ -110,11 +135,12 @@ class DashboardTransactionController extends Controller
 
     public function getamount(Request $request)
     {
-        $data = '';
+        $data = [];
         $prices = Pricing::where('product_id', $request->product)->get();
         foreach ($prices as $price) {
             $y = $request->tenor;
-            $data = $price->$y;
+            $data['amount'] = $price->$y;
+            $data['dp'] = $price->dp;
         }
         return response()->json($data);
     }

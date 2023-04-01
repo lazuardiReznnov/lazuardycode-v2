@@ -168,6 +168,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($data->debt)
                                 <tr>
                                     <td>@currency($data->debt->amount)</td>
                                     <td>{{ $data->debt->tenor }}</td>
@@ -177,6 +178,13 @@
                                         @currency($ttb)
                                     </td>
                                 </tr>
+                                @else
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        No Data
+                                    </td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
