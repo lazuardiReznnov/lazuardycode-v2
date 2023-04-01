@@ -24,6 +24,7 @@ return new class extends Migration {
                 ->cascadeOnUpdate();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->date('tgl');
             $table->integer('amount');
             $table->integer('tenor');
             $table->timestamps();

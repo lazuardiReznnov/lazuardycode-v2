@@ -29,4 +29,9 @@ class Debt extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    public function acountFintech()
+    {
+        return $this->belongsTo(acountFintech::class);
+    }
 }

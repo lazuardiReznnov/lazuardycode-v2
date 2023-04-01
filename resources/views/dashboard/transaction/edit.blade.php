@@ -221,6 +221,7 @@
                                 <option value="" selected>
                                     --Select Tenor--
                                 </option>
+                                @if(old('tenor', $data->tenor)==$data->tenor)
                                 @if($data->tenor==3)
                                 <option value="three" selected>
                                     {{ $data->tenor }}
@@ -237,7 +238,7 @@
                                 <option value="twelve" selected>
                                     {{ $data->tenor }}
                                 </option>
-                                @else
+                                @endif
                                 <option value="three">3</option>
                                 <option value="six">6</option>
                                 <option value="nine">9</option>

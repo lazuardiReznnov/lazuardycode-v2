@@ -35,4 +35,9 @@ class acountFintech extends Model
     {
         return $this->belongsTo(fintech::class);
     }
+
+    public function Debt()
+    {
+        return $this->hasOne(Debt::class);
+    }
 }

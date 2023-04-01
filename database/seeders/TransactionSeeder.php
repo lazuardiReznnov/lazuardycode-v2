@@ -29,6 +29,7 @@ class TransactionSeeder extends Seeder
             'acount_fintech_id' => 1,
             'name' => 'INV001Debt',
             'slug' => 'inv001-debt',
+            'tgl' => '2023/03/21',
             'amount' => 414000,
             'tenor' => 6,
         ]);
