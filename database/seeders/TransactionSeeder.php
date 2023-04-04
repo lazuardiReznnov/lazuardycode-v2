@@ -33,5 +33,21 @@ class TransactionSeeder extends Seeder
             'amount' => 414000,
             'tenor' => 6,
         ]);
+
+        $data = [
+            [
+                'tgl' => '2023/05/01',
+                'amount' => 350000,
+            ],
+            [
+                'tgl' => '2023/06/01',
+                'amount' => 350000,
+            ],
+            [
+                'tgl' => '2023/07/01',
+                'amount' => 350000,
+            ],
+        ];
+        $transaction->Debt->Schadule()->createMany($data);
     }
 }

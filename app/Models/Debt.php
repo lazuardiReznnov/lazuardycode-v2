@@ -34,4 +34,9 @@ class Debt extends Model
     {
         return $this->belongsTo(acountFintech::class);
     }
+
+    public function schadule()
+    {
+        return $this->hasMany(Schadule::class);
+    }
 }

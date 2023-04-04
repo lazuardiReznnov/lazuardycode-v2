@@ -50,7 +50,10 @@ class DashboardDebtController extends Controller
      */
     public function show(Debt $debt)
     {
-        //
+        return view('dashboard.transaction.debt.show', [
+            'title' => 'Debt Transaction Detail',
+            'data' => $debt->load('acountFintech', 'transaction', 'schadule'),
+        ]);
     }
 
     /**
