@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard\Transaction;
 
-use App\Http\Controllers\Controller;
 use App\Models\Debt;
+use App\Models\Fintech;
+use App\Models\Transaction;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\acountFintech;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardDebtController extends Controller
 {
@@ -34,7 +39,11 @@ class DashboardDebtController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.transaction.debt.create', [
+            'title' => 'Create New Debt',
+            'fintechs' => Fintech::all(),
+            'transactions' => Transaction::all(),
+        ]);
     }
 
     /**
@@ -42,7 +51,22 @@ class DashboardDebtController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'acount_fintech_id' => 'required',
+            'transaction_id' => 'required',
+            'name' => 'required|unique:debts',
+            'slug' => 'required|unique:debts',
+            'tgl' => 'required',
+            'amount' => 'required',
+            'tenor' => 'required',
+        ]);
+
+        Debt::create($validatedData);
+
+        return redirect('dashboard/transaction/debt')->with(
+            'success',
+            'Data Has Been Added.!'
+        );
     }
 
     /**
@@ -78,5 +102,17 @@ class DashboardDebtController extends Controller
     public function destroy(Debt $debt)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Debt::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
+    }
+
+    public function getacount(Request $request)
+    {
+        $acount = acountFintech::where('fintech_id', $request->acount)->get();
+        return response()->json($acount);
     }
 }

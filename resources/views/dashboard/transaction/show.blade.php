@@ -48,10 +48,10 @@
                 ><i class="bi bi-upload"></i>
             </a>
             <a
-                href="/dashboard/transaction/debt/{{ $data->slug }}"
+                href="/dashboard/transaction/debt/{{ $data->debt->slug }}"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
-                title="Add Debt"
+                title="detail Debt"
                 class="btn btn-primary my-3"
                 ><i class="bi bi-tag-fill"></i>
             </a>

@@ -43,7 +43,7 @@
         <!-- endPesan -->
         <div class="btn-group">
             <a
-                href="/dashboard/transaction/debt/create"
+                href="/dashboard/transaction/debt/schadule/{{ $data->slug }}"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title="Add Debt"
@@ -178,7 +178,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($data->schadule != "")
+                                @if($data->schadule->count())
                                 @foreach($data->schadule as $dat)
                                 <tr>
                                     <td>
@@ -186,16 +186,51 @@
                                     </td>
                                     <td>@currency($dat->amount)</td>
                                     <td>
-                                        <div class="progress">
-                                            <div
-                                                class="progress-bar"
-                                                role="progressbar"
-                                                style="width: {{ $dat->status }}%"
-                                                aria-valuenow="{{ $dat->status }}"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                            ></div>
-                                        </div>
+                                        @if($data->status == 0)
+                                        <button
+                                            class="badge bg-danger"
+                                            disabled
+                                        >
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+
+                                        @else
+                                        <button
+                                            class="btn btn-success"
+                                            disabled
+                                        >
+                                            <i class="bi bi-check2-circle"></i>
+                                        </button>
+
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="/dashboard/transaction/debt/schadule/{{ $data->id }}/edit"
+                                            class="badge bg-warning"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Edit transaction"
+                                            ><i class="bi bi-pencil-square"></i
+                                        ></a>
+                                        <form
+                                            action="/dashboard/transaction/debt/schadule/{{ $data->id }}"
+                                            method="post"
+                                            class="d-inline"
+                                        >
+                                            @method('delete') @csrf
+                                            <button
+                                                class="badge bg-danger"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Delete Debt Transaction"
+                                                onclick="return confirm('are You sure ??')"
+                                            >
+                                                <i
+                                                    class="bi bi-file-x-fill"
+                                                ></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach @else

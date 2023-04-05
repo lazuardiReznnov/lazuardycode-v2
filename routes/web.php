@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
-use App\Http\Controllers\Dashboard\Fintech\DashboardFintechController;
-use App\Http\Controllers\Dashboard\Marketing\DashboardMarketingController;
-use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\Fintech\DashboardFintechController;
 use App\Http\Controllers\Dashboard\Product\DashboardProductController;
 use App\Http\Controllers\Dashboard\Transaction\DashboardDebtController;
+use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
+use App\Http\Controllers\Dashboard\Marketing\DashboardMarketingController;
+use App\Http\Controllers\Dashboard\Transaction\DashboardSchaduleController;
+use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
 use App\Http\Controllers\Dashboard\Transaction\DashboardTransactionController;
 
 /*
@@ -89,6 +90,16 @@ Route::resource('/dashboard/marketing', DashboardMarketingController::class);
 
 Route::controller(DashboardDebtController::class)->group(function () {
     Route::get('/dashboard/transaction/debt/checkSlug', 'checkSlug');
+});
+
+Route::controller(DashboardSchaduleController::class)->group(function () {
+    Route::get('/dashboard/transaction/debt/schadule/{debt}', 'addschadule');
+    Route::post('/dashboard/transaction/debt/schadule', 'storeschadule');
+});
+
+Route::controller(DashboardDebtController::class)->group(function () {
+    Route::get('/dashboard/transaction/debt/checkSlug', 'checkSlug');
+    Route::get('/dashboard/transaction/debt/getacount', 'getacount');
 });
 
 Route::resource('/dashboard/transaction/debt', DashboardDebtController::class);
