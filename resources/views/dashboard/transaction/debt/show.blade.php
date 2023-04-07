@@ -206,7 +206,7 @@
                                     </td>
                                     <td>
                                         <a
-                                            href="/dashboard/transaction/debt/schadule/{{ $data->id }}/edit"
+                                            href="/dashboard/transaction/debt/schadule/{{ $dat->id }}/edit"
                                             class="badge bg-warning"
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
@@ -214,7 +214,7 @@
                                             ><i class="bi bi-pencil-square"></i
                                         ></a>
                                         <form
-                                            action="/dashboard/transaction/debt/schadule/{{ $data->id }}"
+                                            action="/dashboard/transaction/debt/schadule/{{ $dat->id }}"
                                             method="post"
                                             class="d-inline"
                                         >

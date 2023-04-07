@@ -95,6 +95,14 @@ Route::controller(DashboardDebtController::class)->group(function () {
 Route::controller(DashboardSchaduleController::class)->group(function () {
     Route::get('/dashboard/transaction/debt/schadule/{debt}', 'addschadule');
     Route::post('/dashboard/transaction/debt/schadule', 'storeschadule');
+    Route::get(
+        '/dashboard/transaction/debt/schadule/{schadule}/edit',
+        'editschadule'
+    );
+    Route::put(
+        '/dashboard/transaction/debt/schadule/{schadule}',
+        'updateschadule'
+    );
 });
 
 Route::controller(DashboardDebtController::class)->group(function () {
