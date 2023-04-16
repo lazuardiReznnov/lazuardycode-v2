@@ -179,9 +179,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/dashboard/transaction/ledger">
-                        <i class="bi bi-circle"></i
-                        ><span>Acounting Ledger</span>
+                    <a href="/dashboard/transaction/cashflow">
+                        <i class="bi bi-circle"></i><span>cashflow</span>
                     </a>
                 </li>
                 <li>

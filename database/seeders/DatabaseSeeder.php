@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             MarketingSeeder::class,
             CustomerSeeder::class,
             TransactionSeeder::class,
+            AcountSeeder::class,
         ]);
     }
 }

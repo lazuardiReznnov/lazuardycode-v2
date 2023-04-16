@@ -21,7 +21,13 @@ class ProductSeeder extends Seeder
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
-        $product->pricing()->create(['product_id' => $product->id]);
+        $product->pricing()->create([
+            'cash' => 3000000,
+            'dp' => 300000,
+            'three' => 870000,
+            'six' => 450000,
+            'nine' => 275000,
+        ]);
 
         $product2 = Product::create([
             'category_product_id' => 1,
@@ -32,7 +38,14 @@ class ProductSeeder extends Seeder
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
 
-        $product2->pricing()->create(['product_id' => $product2->id]);
+        $product2->pricing()->create([
+            'cash' => 2000000,
+            'dp' => 300000,
+            'three' => 600000,
+            'six' => 450000,
+            'nine' => 275000,
+        ]);
+
         $product3 = Product::create([
             'category_product_id' => 3,
             'name' => 'Oppo A54',
@@ -41,6 +54,12 @@ class ProductSeeder extends Seeder
             'descriptions' =>
                 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quaerat veniam obcaecati, numquam officia esse cum alias illum ipsam iste.',
         ]);
-        $product3->pricing()->create(['product_id' => $product3->id]);
+        $product3->pricing()->create([
+            'cash' => 3000000,
+            'dp' => 300000,
+            'three' => 870000,
+            'six' => 450000,
+            'nine' => 275000,
+        ]);
     }
 }
