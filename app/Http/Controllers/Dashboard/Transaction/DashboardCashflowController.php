@@ -13,7 +13,24 @@ class DashboardCashflowController extends Controller
      */
     public function index()
     {
-        //
+        $saldo2 = 0;
+        $saldos = Cashflow::select('debet', 'credit')
+            ->where('tgl', '<', date('Y-m-d'))
+            ->get();
+
+        foreach ($saldos as $saldo) {
+            $saldo2 = $saldo2 + $saldo->credit - $saldo->debet;
+        }
+
+        return view('dashboard.transaction.cashflow.index', [
+            'title' => 'Cash In-Out',
+            'saldo' => $saldo2,
+            'datas' => Cashflow::with('acount')
+                ->where('tgl', '=', date('Y-m-d'))
+                ->orderBY('tgl', 'ASC')
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 
     /**
