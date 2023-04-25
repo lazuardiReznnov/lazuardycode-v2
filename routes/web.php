@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\Customer\DashboardCustomerController;
 use App\Http\Controllers\Dashboard\Marketing\DashboardMarketingController;
 use App\Http\Controllers\Dashboard\Transaction\DashboardSchaduleController;
 use App\Http\Controllers\Dashboard\Product\DashboardCategoryProductController;
+use App\Http\Controllers\Dashboard\Transaction\DashboardAcountController;
 use App\Http\Controllers\Dashboard\Transaction\DashboardCashflowController;
 use App\Http\Controllers\Dashboard\Transaction\DashboardTransactionController;
 
@@ -88,6 +89,15 @@ Route::controller(DashboardMarketingController::class)->group(function () {
 });
 
 Route::resource('/dashboard/marketing', DashboardMarketingController::class);
+
+Route::controller(DashboardAcountController::class)->group(function () {
+    Route::get('/dashboard/transaction/cashflow/acount/checkSlug', 'checkSlug');
+});
+
+Route::resource(
+    '/dashboard/transaction/cashflow/acount',
+    DashboardAcountController::class
+);
 
 Route::controller(DashboardCashflowController::class)->group(function () {});
 

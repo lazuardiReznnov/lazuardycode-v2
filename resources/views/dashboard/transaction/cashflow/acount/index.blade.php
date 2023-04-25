@@ -43,51 +43,20 @@
             <div class="col-md-6">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a
-                        href="/dashboard/transaction/cashflow/create-in"
+                        href="/dashboard/transaction/cashflow/acount/create"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
-                        title="Transaction In"
+                        title="Create Acount"
                         class="btn btn-success"
                         ><i class="bi bi-file-plus"></i> Cash In</a
-                    >
-                    <a
-                        href="/dashboard/transaction/cashflow/create-out"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Transaction Out"
-                        class="btn btn-danger"
-                        ><i class="bi bi-file-plus"> Cash Out</i></a
-                    >
-                    <a
-                        href="/dashboard/transaction/cashflow/acount"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Acount"
-                        class="btn btn-primary"
-                        ><i class="bi bi-tag"></i> Acount</a
-                    >
-                    <a
-                        href="/dashboard/transaction/cashflow/export-excel"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Export Excel"
-                        class="btn btn-primary"
-                        ><i class="bi bi-file-earmark-spreadsheet"></i> Export
-                        Excel</a
-                    >
-                    <a
-                        href="/dashboard/transaction/cashflow/export-pdf"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Export Pdf"
-                        class="btn btn-primary"
-                        ><i class="bi bi-file-earmark-spreadsheet"></i> Export
-                        Pdf</a
                     >
                 </div>
             </div>
             <div class="col-md-6">
-                <form action="/dashboard/transaction/cashflow" method="get">
+                <form
+                    action="/dashboard/transaction/cashflow/acount"
+                    method="get"
+                >
                     <div class="input-group mb-3">
                         <input
                             type="text"
@@ -111,49 +80,39 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">cashflow</h5>
-                <p>Date : {{ Date("d M Y") }}</p>
+                <h5 class="card-title">Acount Transaction</h5>
+
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Acount</th>
-                            <th scope="col">Date</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Debet</th>
-                            <th scope="col">Credit</th>
-                            <th scope="col">Saldo</th>
+                            <th scope="col">state</th>
                             <th scope="col">action</th>
                         </tr>
                     </thead>
-                    @php $ttldebet=0; $ttlcredit=0; @endphp
+
                     <tbody>
                         @if($datas->count()) @foreach($datas as $data)
                         <tr>
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>
-                                {{ $data->acount->name }} -
-                                {{ $data->acount->description }}
-                            </td>
-                            <td>
-                                {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}
-                            </td>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->customer->name}}</td>
-                            <td>{{ $data->product->name}}</td>
-                            <td>{{ $data->description }}</td>
-                            <td>@currency($data->debet)</td>
-                            <td>@currency($data->credit)</td>
                             <td>
-                                @php $saldo =
-                                ($saldo+$data->credit)-$data->debet @endphp
-                                @currency($saldo)
+                                {{ $data->description }}
+                            </td>
+
+                            <td>
+                                @php $state=""; @endphp @if($data->state == 0)
+                                @php $state = "Pemasukan"; @endphp @else @php
+                                $state ="Pengeluaran"@endphp @endif
+                                {{ $state }}
                             </td>
                             <td>
                                 <a
-                                    href="/transaction/cashflow/{{ $data->slug }}/edit"
+                                    href="/dashboard/transaction/cashflow/acount/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -161,7 +120,7 @@
                                     ><i class="bi bi-pencil-square"></i
                                 ></a>
                                 <form
-                                    action="/transaction/cashflow/{{ $data->slug }}"
+                                    action="/dashboard/transaction/cashflow/acount/{{ $data->slug }}"
                                     method="post"
                                     class="d-inline"
                                 >
@@ -177,18 +136,8 @@
                                     </button>
                                 </form>
                             </td>
-                            @php $ttldebet = $ttldebet+$data->debet; $ttlcredit
-                            = $ttlcredit+$data->credit; @endphp
                         </tr>
-                        @endforeach
-                        <tr class="fw-bold">
-                            <td colspan="4">Total</td>
-                            <td>@currency($ttldebet)</td>
-                            <td>@currency($ttlcredit)</td>
-                            <td>@currency($saldo)</td>
-                        </tr>
-
-                        @else
+                        @endforeach @else
                         <tr>
                             <td colspan="10" class="text-center">
                                 Data Not Found

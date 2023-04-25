@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers\Dashboard\Transaction;
 
-use App\Http\Controllers\Controller;
 use App\Models\Acount;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardAcountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $acount = acount::query();
+        $acount->when($request->search, function ($query) use ($request) {
+            return $query
+                ->where('description', 'like', '%' . $request->search . '%')
+                ->orWhere('name', 'like', '%' . $request->search . '%');
+        });
+
+        return view('dashboard.transaction.cashflow.acount.index', [
+            'title' => 'Acount',
+            'datas' => $acount
+                ->latest()
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 
     /**
@@ -21,7 +35,9 @@ class DashboardAcountController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.transaction.cashflow.acount.create', [
+            'title' => 'Create Acount',
+        ]);
     }
 
     /**
@@ -29,7 +45,19 @@ class DashboardAcountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|unique:acounts',
+            'slug' => 'required|unique:acounts',
+            'description' => 'required',
+            'state' => 'required',
+        ]);
+
+        acount::create($validateData);
+
+        return redirect('dashboard/transaction/cashflow/acount')->with(
+            'success',
+            'Data Has Been added.!!'
+        );
     }
 
     /**
@@ -45,7 +73,10 @@ class DashboardAcountController extends Controller
      */
     public function edit(Acount $acount)
     {
-        //
+        return view('dashboard.transaction.cashflow.acount.edit', [
+            'title' => 'Edit Acount',
+            'data' => $acount,
+        ]);
     }
 
     /**
@@ -53,7 +84,25 @@ class DashboardAcountController extends Controller
      */
     public function update(Request $request, Acount $acount)
     {
-        //
+        $rules = [
+            'description' => 'required',
+            'state' => 'required',
+        ];
+
+        if ($request->name != $acount->name) {
+            $rules['name'] = 'required|unique:acounts';
+        }
+        if ($request->slug != $acount->slug) {
+            $rules['slug'] = 'required|unique:acounts';
+        }
+
+        $validateData = $request->validate($rules);
+
+        acount::where('id', $acount->id)->update($validateData);
+        return redirect('dashboard/transaction/cashflow/acount')->with(
+            'success',
+            'Data has Been Updated.'
+        );
     }
 
     /**
@@ -61,6 +110,17 @@ class DashboardAcountController extends Controller
      */
     public function destroy(Acount $acount)
     {
-        //
+        $acount->destroy($acount->id);
+
+        return redirect('dashboard/transaction/cashflow/acount')->with(
+            'success',
+            'Data has Been Deleted.'
+        );
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(acount::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
     }
 }
