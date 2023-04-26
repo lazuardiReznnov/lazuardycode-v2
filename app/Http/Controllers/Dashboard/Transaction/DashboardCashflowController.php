@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard\Transaction;
 
-use App\Http\Controllers\Controller;
+use App\Models\Acount;
 use App\Models\Cashflow;
+use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardCashflowController extends Controller
 {
@@ -25,7 +28,7 @@ class DashboardCashflowController extends Controller
         return view('dashboard.transaction.cashflow.index', [
             'title' => 'Cash In-Out',
             'saldo' => $saldo2,
-            'datas' => Cashflow::with('acount')
+            'datas' => Cashflow::with('acount', 'transaction')
                 ->where('tgl', '=', date('Y-m-d'))
                 ->orderBY('tgl', 'ASC')
                 ->paginate(10)
@@ -38,15 +41,46 @@ class DashboardCashflowController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.transaction.cashflow.create-in', [
+            'title' => 'Add Transaction',
+            'datas' => Acount::where('state', '=', 0)->get(),
+            'transactions' => Transaction::with('customer')->get(),
+        ]);
     }
 
+    public function createout()
+    {
+        return view('dashboard.transaction.cashflow.create-out', [
+            'title' => 'Add Transaction',
+            'datas' => Acount::where('state', '=', 1)->get(),
+            'transactions' => Transaction::with('customer')->get(),
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'acount_id' => 'required',
+            'description' => 'required',
+            'tgl' => 'required',
+            'debet' => 'required',
+            'credit' => 'required',
+            'transaction_id' => 'required',
+        ]);
+
+        $validatedData['slug'] = Str::slug(
+            $request->acount_id . $request->tgl . $request->description,
+            '-'
+        );
+
+        Cashflow::create($validatedData);
+
+        return redirect('/dashboard/transaction/cashflow')->with(
+            'success',
+            'data Has Been Added'
+        );
     }
 
     /**

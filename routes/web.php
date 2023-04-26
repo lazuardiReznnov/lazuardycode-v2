@@ -99,7 +99,9 @@ Route::resource(
     DashboardAcountController::class
 );
 
-Route::controller(DashboardCashflowController::class)->group(function () {});
+Route::controller(DashboardCashflowController::class)->group(function () {
+    Route::get('/dashboard/transaction/cashflow/create-out', 'createout');
+});
 
 Route::resource(
     '/dashboard/transaction/cashflow',

@@ -141,9 +141,40 @@
                                     <td>@currency($data->amount)</td>
                                     <td>{{ $data->tenor }}</td>
                                     <td>
-                                        @php $ttm = $data->amount *$data->tenor
-                                        @endphp @currency($ttm)
+                                        <?php
+                                        $ttm = ($data->amount
+                                        *$data->tenor)+$data->dp; ?>
+                                        @currency($ttm)
                                     </td>
+                                    <td>
+                                        <?php
+                                        $tpb = 0;
+                                        $tbb=0;    
+                                        $dp=0;
+                                        $tf = 0;
+                                      ?>
+
+                                        @foreach($data->cashflow as $ca)
+                                        @if($ca->acount->name == 20001 &&
+                                        $ca->transaction_id == $data->id)
+                                        <?php   
+                                        $tpb = $tpb+$ca->credit; ?>
+                                        @elseif($ca->acount->name==30001 &&
+                                        $ca->transaction_id == $data->id)
+                                        <?php
+                                        $tbb = $tbb+$ca->debet; ?>
+                                        @elseif($ca->acount->name==20002 &&
+                                        $ca->transaction_id == $data->id)
+                                        <?php
+                                            $dp = $ca->credit; ?>
+                                        @elseif($ca->acount->name==30003 &&
+                                        $ca->transaction_id == $data->id)
+
+                                        <?php 
+                                            $tf = $tf + $ca->debet; ?> @endif
+                                        @endforeach @currency($tpb+$dp)
+                                    </td>
+                                    <td>@currency($ttm-$tpb)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -177,6 +208,8 @@
                                         *$data->debt->tenor @endphp
                                         @currency($ttb)
                                     </td>
+                                    <td>@currency($tbb)</td>
+                                    <td>@currency($ttb-$tbb)</td>
                                 </tr>
                                 @else
                                 <tr>
@@ -185,6 +218,74 @@
                                     </td>
                                 </tr>
                                 @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <h5 class="card-title">Transaction Fee Overview</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Amount Fee</th>
+                                    <th scope="col">Tenor</th>
+                                    <th scope="col">Total Fee</th>
+                                    <th scope="col">Total Paid fee</th>
+                                    <th scope="col">difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@currency(20000)</td>
+                                    <td>{{ $data->tenor }}</td>
+                                    <td>@currency($data->tenor * 20000)</td>
+                                    <td>@currency($tf)</td>
+                                    <td>
+                                        @currency(($data->tenor *20000)-$tf)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <h5 class="card-title">Grand Total</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Total Debt</th>
+                                    <th scope="col">difference</th>
+                                    <th scope="col">Total Paid</th>
+                                    <th scope="col">Total Debt Paid</th>
+                                    <th scope="col">difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php
+                                       $ttf=($data->tenor*20000); $gtb
+                                    =$ttf+$ttb; $tp = $tpb+$dp; $tdp = $tbb+$tf;
+                                    ?>
+                                    <td>@currency($ttm)</td>
+                                    <td>@currency($gtb)</td>
+                                    <td>@currency($ttm-$gtb)</td>
+                                    <td>@currency($tp)</td>
+                                    <td>@currency($tdp)</td>
+                                    <td>@currency($tp-$tdp)</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

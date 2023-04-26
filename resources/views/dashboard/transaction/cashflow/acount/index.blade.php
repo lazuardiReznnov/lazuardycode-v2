@@ -5,6 +5,9 @@
             <x-breadcrumblink link="/dashboard/transaction"
                 >Transaction</x-breadcrumblink
             >
+            <x-breadcrumblink link="/dashboard/transaction/cashflow"
+                >Cashflow</x-breadcrumblink
+            >
             <x-breadcrumbactive>{{ $title }}</x-breadcrumbactive>
         </x-breadcrumb>
     </x-pagetitle>

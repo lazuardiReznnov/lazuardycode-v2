@@ -115,8 +115,27 @@
                                 ($data->tenor*$data->amount)+$data->dp @endphp
                                 @currency($ttlmount)
                             </td>
-                            <td>0</td>
-                            <td>0</td>
+                            <?php
+                                $tdb = 0;
+                                $gtm = 0;
+                                $gtp=0;
+                                $gdf=0;
+                            ?>
+
+                            @foreach($data->transaction->cashflow as $cf)
+                            @if($cf->acount->name == 30001)
+                            <?php
+                                $tdb = $tdb+$cf->debet; ?> @endif @endforeach
+
+                            <?php
+                                    $gtm = $gtm+$ttlmount;
+                                    $gtp = $gtp+$tdb;
+                                    $df = $ttlmount-$tdb;
+                                    $gdf = $gdf+$df;
+                                ?>
+
+                            <td>@currency($tdb)</td>
+                            <td>@currency($df)</td>
                             <td>
                                 <a
                                     href="/dashboard/transaction/debt/{{ $data->slug }}"
@@ -129,7 +148,17 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach @else
+                        @endforeach
+                        <tr>
+                            <td colspan="4" class="fw-bold text-end">
+                                Grand Total
+                            </td>
+                            <td class="fw-bold">@currency($gtm)</td>
+                            <td class="fw-bold">@currency($gtp)</td>
+                            <td class="fw-bold">@currency($gdf)</td>
+                            <td></td>
+                        </tr>
+                        @else
                         <tr>
                             <td colspan="10" class="text-center">
                                 Data Not Found

@@ -27,6 +27,7 @@ class DashboardTransactionController extends Controller
         return view('dashboard.transaction.index', [
             'title' => 'Transaction List',
             'datas' => $transaction
+                ->with('cashflow')
                 ->latest()
                 ->with('product', 'customer')
                 ->paginate(10)
@@ -86,7 +87,12 @@ class DashboardTransactionController extends Controller
     {
         return view('dashboard.transaction.show', [
             'title' => $transaction->name,
-            'data' => $transaction->load('product', 'customer', 'debt'),
+            'data' => $transaction->load(
+                'product',
+                'customer',
+                'debt',
+                'cashflow'
+            ),
         ]);
     }
 

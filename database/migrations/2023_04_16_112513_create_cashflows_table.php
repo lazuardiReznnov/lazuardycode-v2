@@ -17,11 +17,7 @@ return new class extends Migration {
                 ->constrained('acounts')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table
-                ->foreignId('transaction_id')
-                ->constrained('transactions')
-                ->cascadeOnDelete()
-                ->cascadeOnDelete();
+            $table->foreignId('transaction_id');
             $table->date('tgl');
             $table->string('slug')->unique();
             $table->string('description');

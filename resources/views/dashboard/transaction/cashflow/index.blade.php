@@ -43,7 +43,7 @@
             <div class="col-md-6">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a
-                        href="/dashboard/transaction/cashflow/create-in"
+                        href="/dashboard/transaction/cashflow/create"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title="Transaction In"
@@ -140,10 +140,15 @@
                             <td>
                                 {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}
                             </td>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->customer->name}}</td>
-                            <td>{{ $data->product->name}}</td>
-                            <td>{{ $data->description }}</td>
+
+                            <td>
+                                {{ $data->description }} <br />
+                                @if($data->transaction)
+                                {{ $data->transaction->customer->name}} -
+                                {{ $data->transaction->product->name }}
+                                @endif
+                            </td>
+
                             <td>@currency($data->debet)</td>
                             <td>@currency($data->credit)</td>
                             <td>

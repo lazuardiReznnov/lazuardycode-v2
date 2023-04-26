@@ -148,6 +148,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                $tdb = 0;
+                            ?>
+                                @foreach($data->transaction->cashflow as $cf)
+                                @if($cf->acount->name == 30001)
+                                <?php
+                                    $tdb = $tdb+$cf->debet; ?> @endif
+                                @endforeach
                                 <tr>
                                     <td>@currency($data->amount)</td>
                                     <td>{{ $data->tenor }}</td>
@@ -155,6 +163,8 @@
                                         @php $ttm = $data->amount *$data->tenor
                                         @endphp @currency($ttm)
                                     </td>
+                                    <td>@currency($tdb)</td>
+                                    <td>@currency($ttm-$tdb)</td>
                                 </tr>
                             </tbody>
                         </table>
