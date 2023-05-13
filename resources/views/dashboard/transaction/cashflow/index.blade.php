@@ -11,7 +11,7 @@
 
     <!-- End Page Title -->
 
-    <x-section numb="12">
+    <x-section>
         <!-- Pesan -->
         <div class="row">
             <div class="col-md-10">
@@ -185,21 +185,19 @@
                             @php $ttldebet = $ttldebet+$data->debet; $ttlcredit
                             = $ttlcredit+$data->credit; @endphp
                         </tr>
-                        @endforeach
-                        <tr class="fw-bold">
-                            <td colspan="4">Total</td>
-                            <td>@currency($ttldebet)</td>
-                            <td>@currency($ttlcredit)</td>
-                            <td>@currency($saldo)</td>
-                        </tr>
-
-                        @else
+                        @endforeach @else
                         <tr>
                             <td colspan="10" class="text-center">
                                 Data Not Found
                             </td>
                         </tr>
                         @endif
+                        <tr class="fw-bold">
+                            <td colspan="4">Total</td>
+                            <td>@currency($ttldebet)</td>
+                            <td>@currency($ttlcredit)</td>
+                            <td>@currency($saldo)</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="row">
