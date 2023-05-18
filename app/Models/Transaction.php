@@ -44,4 +44,9 @@ class Transaction extends Model
     {
         return $this->hasMany(Cashflow::class);
     }
+
+    public function marketing()
+    {
+        return $this->belongsTo(Marketing::class);
+    }
 }

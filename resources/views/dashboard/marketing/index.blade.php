@@ -8,7 +8,7 @@
 
     <!-- End Page Title -->
 
-    <x-section numb="12">
+    <x-section>
         <!-- Pesan -->
         <div class="row">
             <div class="col-md-10">

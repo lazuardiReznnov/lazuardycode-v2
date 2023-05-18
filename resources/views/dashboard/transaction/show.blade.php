@@ -229,7 +229,11 @@
             <div class="col-xl">
                 <div class="card">
                     <div class="card-body pt-3">
+                        <h5 class="card-title">
+                            Marketing : {{ $data->marketing->name }}
+                        </h5>
                         <h5 class="card-title">Transaction Fee Overview</h5>
+
                         <table class="table">
                             <thead>
                                 <tr>

@@ -22,6 +22,11 @@ return new class extends Migration {
                 ->constrained('products')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table
+                ->foreignId('marketing_id')
+                ->constrained('marketings')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->date('tgl');

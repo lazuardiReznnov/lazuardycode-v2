@@ -141,6 +141,9 @@
                 <x-nav-content-item link="/dashboard/transaction/debt">
                     Debt
                 </x-nav-content-item>
+                <x-nav-content-item link="/dashboard/transaction/fee">
+                    Fee Data
+                </x-nav-content-item>
             </x-nav-content>
         </x-nav-item>
         <!-- End Transaction -->

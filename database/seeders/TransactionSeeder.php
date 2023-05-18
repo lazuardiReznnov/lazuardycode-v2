@@ -16,6 +16,7 @@ class TransactionSeeder extends Seeder
         $transaction = Transaction::create([
             'customer_id' => 1,
             'product_id' => 1,
+            'marketing_id' => 1,
             'name' => 'INV001',
             'slug' => 'inv-001',
             'tgl' => '2023/03/21',

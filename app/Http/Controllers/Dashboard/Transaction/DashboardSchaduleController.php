@@ -9,6 +9,10 @@ use App\Models\Schadule;
 
 class DashboardSchaduleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function addschadule(Debt $debt)
     {
         return view('dashboard.transaction.debt.schadule.create', [

@@ -16,6 +16,10 @@ class DashboardTransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $transaction = Transaction::query();
@@ -91,7 +95,8 @@ class DashboardTransactionController extends Controller
                 'product',
                 'customer',
                 'debt',
-                'cashflow'
+                'cashflow',
+                'marketing'
             ),
         ]);
     }

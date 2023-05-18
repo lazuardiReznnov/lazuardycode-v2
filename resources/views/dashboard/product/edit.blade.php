@@ -147,7 +147,7 @@
 
                         <div class="col-md-6">
                             <textarea
-                                class="form-control"
+                                class="form-control tinymce-editor"
                                 id="descriptions"
                                 name="descriptions"
                                 rows="3"

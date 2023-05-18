@@ -30,4 +30,9 @@ class Marketing extends Model
     {
         return $this->MorphOne(Image::class, 'imageable');
     }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
