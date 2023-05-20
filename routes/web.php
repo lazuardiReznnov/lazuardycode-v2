@@ -25,7 +25,7 @@ use App\Http\Controllers\Dashboard\Transaction\DashboardTransactionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -34,6 +34,7 @@ Route::get('/dashboard', [
     App\Http\Controllers\HomeController::class,
     'index',
 ])->name('dashboard');
+
 Route::controller(DashboardCategoryProductController::class)->group(
     function () {
         Route::get('/dashboard/product/CategoryProduct/checkSlug', 'checkSlug');
@@ -52,6 +53,8 @@ Route::controller(DashboardProductController::class)->group(function () {
     Route::get('/dashboard/product/checkSlug', 'checkSlug');
     Route::get('/dashboard/product/pricing/{product}', 'pricingcreate');
     Route::put('/dashboard/product/pricing/{product}', 'pricingstore');
+    Route::get('/dashboard/product/upload-excel', 'uploadexcel');
+    Route::post('/dashboard/product/store-excel', 'storeexcel');
 });
 
 Route::resource('dashboard/product', DashboardProductController::class);

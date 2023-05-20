@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Dashboard\Product;
 
 use App\Models\product;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
 use App\Models\CategoryProduct;
 use App\Http\Controllers\Controller;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardProductController extends Controller
 {
@@ -56,7 +58,7 @@ class DashboardProductController extends Controller
         ]);
 
         $product = product::create($validatedData);
-        $product->pricing()->create(['product_id' => $product->id]);
+        $product->pricing()->create();
 
         return redirect('/dashboard/product')->with(
             'success',
@@ -108,6 +110,9 @@ class DashboardProductController extends Controller
         $validatedData = $request->validate($rules);
         product::where('id', $product->id)->update($validatedData);
 
+        if ($product->pricing == '') {
+            $product->pricing()->create();
+        }
         return redirect('/dashboard/product')->with(
             'success',
             'Product Has Been Upadated.'
@@ -210,5 +215,27 @@ class DashboardProductController extends Controller
             'success',
             'Data Has Been Updated.!'
         );
+    }
+
+    public function uploadexcel()
+    {
+        return view('dashboard.product.upload-excel', [
+            'title' => 'Upload File',
+        ]);
+    }
+
+    public function storeexcel(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new ProductImport(), $validatedData['excl']);
+            return redirect('/dashboard/product')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }

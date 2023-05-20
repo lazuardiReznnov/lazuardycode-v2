@@ -55,6 +55,14 @@
                         title="Add Product"
                         ><i class="bi bi-file-plus"></i
                     ></a>
+                    <a
+                        class="btn btn-primary"
+                        href="/dashboard/product/upload-excel"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Upload Product"
+                        ><i class="bi bi-upload"></i
+                    ></a>
                 </div>
             </div>
             <div class="col-md-6">

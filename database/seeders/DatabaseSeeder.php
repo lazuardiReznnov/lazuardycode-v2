@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FintechSeeder::class,
             CategoryProductSeeder::class,
-            ProductSeeder::class,
+            // ProductSeeder::class,
             MarketingSeeder::class,
             CustomerSeeder::class,
-            TransactionSeeder::class,
+            // TransactionSeeder::class,
             AcountSeeder::class,
         ]);
     }

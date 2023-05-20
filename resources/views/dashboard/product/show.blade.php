@@ -198,7 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @if($data->pricing)
                             <div
                                 class="tab-pane fade profile-overview pt-3"
                                 id="pricing"
@@ -248,6 +248,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <!-- End Bordered Tabs -->
                     </div>
