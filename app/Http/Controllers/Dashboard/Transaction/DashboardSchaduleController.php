@@ -59,4 +59,23 @@ class DashboardSchaduleController extends Controller
             '/dashboard/transaction/debt/' . $request->debt_slug
         )->with('success', 'Data Has Been added .!');
     }
+
+    public function editstate(Schadule $schadule)
+    {
+        return view('dashboard.transaction.debt.schadule.editstate', [
+            'title' => 'Update State',
+            'data' => $schadule->load('debt'),
+        ]);
+    }
+
+    public function updatestate(Schadule $schadule, Request $request)
+    {
+        $validatedData = $request->validate(['status' => 'required']);
+
+        Schadule::where('id', $schadule->id)->update($validatedData);
+
+        return redirect(
+            '/dashboard/transaction/debt/' . $request->debt_slug
+        )->with('success', 'Data Has Been added .!');
+    }
 }

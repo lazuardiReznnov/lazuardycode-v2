@@ -47,6 +47,7 @@
                 class="btn btn-primary my-3"
                 ><i class="bi bi-upload"></i>
             </a>
+            @if($data->debt)
             <a
                 href="/dashboard/transaction/debt/{{ $data->debt->slug }}"
                 data-bs-toggle="tooltip"
@@ -55,7 +56,7 @@
                 class="btn btn-primary my-3"
                 ><i class="bi bi-tag-fill"></i>
             </a>
-
+            @endif
             <a
                 href="/dashboard/transaction/{{ $data->slug }}/edit"
                 class="btn btn-warning my-3"
@@ -199,6 +200,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $ttb=0;
+                                ?>
                                 @if($data->debt)
                                 <tr>
                                     <td>@currency($data->debt->amount)</td>

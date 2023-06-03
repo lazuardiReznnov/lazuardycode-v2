@@ -22,7 +22,7 @@ class DashboardCashflowController extends Controller
     {
         $saldo2 = 0;
         $saldos = Cashflow::select('debet', 'credit')
-            ->where('tgl', '<', date('Y-m-d'))
+            ->whereMonth('tgl', '<', date('m'))
             ->get();
 
         foreach ($saldos as $saldo) {
@@ -33,7 +33,7 @@ class DashboardCashflowController extends Controller
             'title' => 'Cash In-Out',
             'saldo' => $saldo2,
             'datas' => Cashflow::with('acount', 'transaction')
-                ->where('tgl', '=', date('Y-m-d'))
+                ->whereMonth('tgl', '=', date('m'))
                 ->orderBY('tgl', 'ASC')
                 ->paginate(10)
                 ->withQueryString(),

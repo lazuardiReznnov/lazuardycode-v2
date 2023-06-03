@@ -192,11 +192,19 @@
                                 @foreach($data->schadule as $dat)
                                 <tr>
                                     <td>
-                                        {{ \Carbon\Carbon::parse($dat->tgl)->format('d/m/Y') }}
+                                        <a
+                                            href="/dashboard/transaction/debt/schadule/editstate/{{ $dat->id }}"
+                                            class="badge bg-warning"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Edit transaction"
+                                        >
+                                            {{ \Carbon\Carbon::parse($dat->tgl)->format('d/m/Y') }}
+                                        </a>
                                     </td>
                                     <td>@currency($dat->amount)</td>
                                     <td>
-                                        @if($data->status == 0)
+                                        @if($dat->status == 0)
                                         <button
                                             class="badge bg-danger"
                                             disabled

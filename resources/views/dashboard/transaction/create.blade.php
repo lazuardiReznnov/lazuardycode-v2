@@ -276,7 +276,42 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label
+                            for="category"
+                            class="col-md-4 col-form-label text-md-end"
+                            >{{ __("Marketing") }}</label
+                        >
 
+                        <div class="col-md-6">
+                            <select
+                                class="form-select @error('marketing_id') is-invalid @enderror"
+                                id="marketing"
+                                aria-label="marketing"
+                                name="marketing_id"
+                            >
+                                <option selected value="">
+                                    Select Marketing
+                                </option>
+                                @foreach($marketings as $marketing)
+                                @if(old('marketing_id')==$marketing->id)
+                                <option value="{{ $marketing->id }}" selected>
+                                    {{ $marketing->name }}
+                                </option>
+                                @else
+                                <option value="{{ $marketing->id }}">
+                                    {{ $marketing->name }}
+                                </option>
+                                @endif @endforeach
+                            </select>
+
+                            @error('marketing_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3 ms-1">
                         <div class="col-md text-md-end">
                             <button

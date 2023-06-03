@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryProduct;
 use App\Models\Customer;
+use App\Models\Marketing;
 use App\Models\Pricing;
 use App\Models\Product;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -48,6 +49,7 @@ class DashboardTransactionController extends Controller
             'title' => 'Create Transaction',
             'categories' => CategoryProduct::all(),
             'customers' => Customer::all(),
+            'marketings' => Marketing::all(),
         ]);
     }
 
@@ -59,6 +61,7 @@ class DashboardTransactionController extends Controller
         $validatedData = $request->validate([
             'customer_id' => 'required',
             'product_id' => 'required',
+            'marketing_id' => 'required',
             'name' => 'required|unique:transactions',
             'slug' => 'required|unique:transactions',
             'tgl' => 'required',

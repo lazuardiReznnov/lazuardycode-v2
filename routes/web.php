@@ -120,6 +120,14 @@ Route::controller(DashboardSchaduleController::class)->group(function () {
     Route::get('/dashboard/transaction/debt/schadule/{debt}', 'addschadule');
     Route::post('/dashboard/transaction/debt/schadule', 'storeschadule');
     Route::get(
+        '/dashboard/transaction/debt/schadule/editstate/{schadule}',
+        'editstate'
+    );
+    Route::put(
+        '/dashboard/transaction/debt/schadule/updatestate/{schadule}',
+        'updatestate'
+    );
+    Route::get(
         '/dashboard/transaction/debt/schadule/{schadule}/edit',
         'editschadule'
     );
