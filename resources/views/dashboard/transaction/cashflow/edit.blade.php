@@ -21,42 +21,46 @@
                     <div class="card-body">
                         <h5 class="card-title">Form Transaction</h5>
                         <form
-                            action="/dashboard/transaction/cashflow"
+                            action="/dashboard/transaction/cashflow/{{ $data->slug }}"
                             method="post"
                         >
-                            @csrf
-                            <input type="hidden" name="debet" value="0" />
+                            @csrf @method('put')
+                            <div class="col-md-6">
+                                @if($data->image)
+                                <img
+                                    width="100"
+                                    src="{{ asset('storage/'. $data->image->pic) }}"
+                                    class="my-3 d-block"
+                                    alt="{{ $data->image->name }}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="old_pic"
+                                    value="{{ $data->image->pic }}"
+                                />
+                                @else
 
-                            <div class="row mb-3">
-                                <label
-                                    for="pic"
-                                    class="col-md-2 col-form-label"
-                                    >{{ __("picture") }}</label
-                                >
-
-                                <div class="col-md-6">
-                                    <img
-                                        width="200"
-                                        class="img-preview img-fluid mb-2"
-                                        alt=""
-                                    />
-
-                                    <input
-                                        id="pic"
-                                        type="file"
-                                        class="form-control @error('pic') is-invalid @enderror"
-                                        name="pic"
-                                        value="{{ old('pic') }}"
-                                        onchange="previewImage()"
-                                        autocomplete="pic"
-                                        autofocus
-                                    />
-                                    @error('pic')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                <img
+                                    width="200"
+                                    class="img-preview img-fluid mb-2"
+                                    alt=""
+                                />
+                                @endif
+                                <input
+                                    id="pic"
+                                    type="file"
+                                    class="form-control @error('pic') is-invalid @enderror"
+                                    name="pic"
+                                    value="{{ old('pic') }}"
+                                    onchange="previewImage()"
+                                    autocomplete="pic"
+                                    autofocus
+                                />
+                                @error('pic')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-floating mb-3">
                                 <input
@@ -65,6 +69,7 @@
                                     id="date"
                                     name="tgl"
                                     type="date"
+                                    value="{{ old('tgl', $data->tgl) }}"
                                 />
 
                                 <label for="date">date</label>
@@ -74,7 +79,6 @@
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-floating mb-3">
                                 <select
                                     class="form-select @error('acount_id') is-invalid @enderror"
@@ -83,16 +87,17 @@
                                     name="acount_id"
                                 >
                                     <option selected>Select Acount</option>
-                                    @foreach($datas as $data)
-                                    @if(old('acount_id')==$data->id)
-                                    <option value="{{ $data->id }}" selected>
-                                        {{ $data->name }} -
-                                        {{ $data->description }}
+                                    @foreach($datas as $acount)
+                                    @if(old('acount_id',
+                                    $data->acount_id)==$acount->id)
+                                    <option value="{{ $acount->id }}" selected>
+                                        {{ $acount->name }} -
+                                        {{ $acount->description }}
                                     </option>
                                     @else
-                                    <option value="{{ $data->id }}">
-                                        {{ $data->name }} -
-                                        {{ $data->description }}
+                                    <option value="{{ $acount->id }}">
+                                        {{ $acount->name }} -
+                                        {{ $acount->description }}
                                     </option>
                                     @endif @endforeach
                                 </select>
@@ -110,7 +115,8 @@
                                         Select Transaction
                                     </option>
                                     @foreach($transactions as $transaction)
-                                    @if(old('transaction_id')==$transaction->id)
+                                    @if(old('transaction_id',
+                                    $data->transaction_id)==$transaction->id)
                                     <option
                                         value="{{ $transaction->id }}"
                                         selected
@@ -139,7 +145,7 @@
                                     placeholder="Description"
                                     id="description"
                                     name="description"
-                                    >{{ old("description") }}</textarea
+                                    >{{ old("description", $data->description) }}</textarea
                                 >
                                 <label for="description">Description</label>
                                 @error('description')
@@ -156,6 +162,7 @@
                                     id="credit"
                                     name="credit"
                                     type="text"
+                                    value="{{ old('credit', $data->credit) }}"
                                 />
 
                                 <label for="credit">credit</label>
@@ -167,8 +174,26 @@
                             </div>
 
                             <div class="form-floating mb-3">
+                                <input
+                                    class="form-control @error('debet') is-invalid @enderror"
+                                    placeholder="debet"
+                                    id="debet"
+                                    name="debet"
+                                    type="text"
+                                    value="{{ old('debet', $data->debet) }}"
+                                />
+
+                                <label for="debet">debet</label>
+                                @error('debet')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-floating mb-3">
                                 <button type="submit" class="btn btn-success">
-                                    Save
+                                    Update
                                 </button>
                             </div>
                         </form>
@@ -177,8 +202,4 @@
             </div>
         </div>
     </x-section>
-    @push('script')
-
-    <script src="/assets/js/lazuardicode.js"></script>
-    @endpush
 </x-administrator>

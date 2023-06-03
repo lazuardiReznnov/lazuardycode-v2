@@ -158,7 +158,7 @@
                             </td>
                             <td>
                                 <a
-                                    href="/transaction/cashflow/{{ $data->slug }}/edit"
+                                    href="/dashboard/transaction/cashflow/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -166,7 +166,7 @@
                                     ><i class="bi bi-pencil-square"></i
                                 ></a>
                                 <form
-                                    action="/transaction/cashflow/{{ $data->slug }}"
+                                    action="/dashboard/transaction/cashflow/{{ $data->slug }}"
                                     method="post"
                                     class="d-inline"
                                 >

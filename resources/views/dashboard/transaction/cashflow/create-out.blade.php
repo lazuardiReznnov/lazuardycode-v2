@@ -21,6 +21,35 @@
                 <form action="/dashboard/transaction/cashflow" method="post">
                     @csrf
                     <input type="hidden" name="credit" value="0" />
+                    <div class="row mb-3">
+                        <label for="pic" class="col-md-2 col-form-label">{{
+                            __("picture")
+                        }}</label>
+
+                        <div class="col-md-6">
+                            <img
+                                width="200"
+                                class="img-preview img-fluid mb-2"
+                                alt=""
+                            />
+
+                            <input
+                                id="pic"
+                                type="file"
+                                class="form-control @error('pic') is-invalid @enderror"
+                                name="pic"
+                                value="{{ old('pic') }}"
+                                onchange="previewImage()"
+                                autocomplete="pic"
+                                autofocus
+                            />
+                            @error('pic')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-floating mb-3">
                         <input
                             class="form-control @error('tgl') is-invalid @enderror"
@@ -132,4 +161,8 @@
             </div>
         </div>
     </x-section>
+    @push('script')
+
+    <script src="/assets/js/lazuardicode.js"></script>
+    @endpush
 </x-administrator>

@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardCashflowController extends Controller
 {
@@ -18,6 +19,7 @@ class DashboardCashflowController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         $saldo2 = 0;
@@ -79,7 +81,15 @@ class DashboardCashflowController extends Controller
             '-'
         );
 
-        Cashflow::create($validatedData);
+        $cashflow = Cashflow::create($validatedData);
+
+        if ($request->file('pic')) {
+            $data = $request->validate([
+                'pic' => 'image|file|max:2048',
+            ]);
+            $data['pic'] = $request->file('pic')->store('cashflow-pic');
+            $cashflow->image()->create($data);
+        }
 
         return redirect('/dashboard/transaction/cashflow')->with(
             'success',
@@ -100,7 +110,12 @@ class DashboardCashflowController extends Controller
      */
     public function edit(Cashflow $cashflow)
     {
-        //
+        return view('dashboard.transaction.cashflow.edit', [
+            'title' => 'Edit Data',
+            'data' => $cashflow,
+            'datas' => Acount::all(),
+            'transactions' => Transaction::with('customer')->get(),
+        ]);
     }
 
     /**
@@ -108,7 +123,32 @@ class DashboardCashflowController extends Controller
      */
     public function update(Request $request, Cashflow $cashflow)
     {
-        //
+        $rules = [
+            'acount_id' => 'required',
+            'description' => 'required',
+            'tgl' => 'required',
+            'debet' => 'required',
+            'credit' => 'required',
+            'transaction_id' => 'required',
+        ];
+
+        $validatedData = $request->validate($rules);
+        Cashflow::where('id', $cashflow->id)->update($validatedData);
+        if ($request->file('pic')) {
+            $request->validate(['pic' => 'image|file|max:2048']);
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+                $cashflow->image()->delete();
+            }
+            $cashflow->image()->create([
+                'pic' => $request->file('pic')->store('cashflow-pic'),
+            ]);
+        }
+
+        return redirect('/dashboard/transaction/cashflow')->with(
+            'success',
+            'data Has Been Updated'
+        );
     }
 
     /**
@@ -116,6 +156,11 @@ class DashboardCashflowController extends Controller
      */
     public function destroy(Cashflow $cashflow)
     {
-        //
+        $cashflow->destroy($cashflow->id);
+
+        return redirect('/dashboard/transaction/cashflow')->with(
+            'success',
+            'data Has Been Deleted'
+        );
     }
 }
