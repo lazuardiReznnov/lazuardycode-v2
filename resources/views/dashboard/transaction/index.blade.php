@@ -109,15 +109,24 @@
                                 ($data->tenor*$data->amount)+$data->dp @endphp
                                 @currency($ttlmount)
                             </td>
-                            @php $ttb = 0; @endphp
+                            @php $ttb = 0; $ttt = 0; $td = 0; @endphp
                             <td>
                                 @foreach($data->cashflow as $ca)
                                 @if($ca->acount->name == 20001 &&
                                 $ca->transaction_id == $data->id)
-                                <?php $ttb = $ttb+$ca->credit; ?> @endif
-                                @endforeach @currency($ttb)
+
+                                <?php $ttb = $ttb+$ca->credit; ?>@endif
+                                @if($ca->acount->name == 20002 &&
+                                $ca->transaction_id == $data->id)
+                                <?php 
+                                $ttt =
+                                $ca->credit ?> @endif @endforeach
+                                <?php 
+                                    $td = $ttb+$ttt;
+                                ?>
+                                @currency($td)
                             </td>
-                            <td>@currency($ttlmount-$ttb)</td>
+                            <td>@currency($ttlmount-$td)</td>
                             <td>
                                 <a
                                     href="/dashboard/transaction/{{ $data->slug }}"

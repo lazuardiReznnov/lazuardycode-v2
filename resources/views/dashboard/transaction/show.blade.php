@@ -173,9 +173,13 @@
 
                                         <?php 
                                             $tf = $tf + $ca->debet; ?> @endif
-                                        @endforeach @currency($tpb+$dp)
+
+                                        <?php 
+                                            $ttt = $tpb+$dp;
+                                          ?>
+                                        @endforeach @currency($ttt)
                                     </td>
-                                    <td>@currency($ttm-$tpb)</td>
+                                    <td>@currency($ttm-$ttt)</td>
                                 </tr>
                             </tbody>
                         </table>
